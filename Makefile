@@ -5,31 +5,27 @@
 ## Makefile
 ##
 
-SRC		 =	$(wildcard src/*.c)	\
+all: lib asm corewar
 
-OBJ 	 =	$(SRC:.c=.o)
+lib:
+	@make -C lib/
 
-NAME	 =	corewar
+asm:
+	@make -C asm/
 
-CFLAGS 	 = 	-Wall -Wextra -g
-LDFLAGS  =  -lm -lmy
-CPPFLAGS =  -Iinclude/
-
-all: libmy $(NAME)
-
-libmy:
-	make -C lib/
-
-$(NAME):	$(OBJ)
-	gcc -o $(NAME) $(SRC) -L./lib $(CPPFLAGS) $(LDFLAGS) $(CFLAGS)
+corewar:
+	@make -C corewar/
 
 clean:
-	rm -f $(OBJ)
+	@make clean -C lib/
+	@make clean -C asm/
+	@make clean -C corewar/
 
 fclean: clean
-	rm -f $(NAME)
-	make -C lib/ fclean
+	@make fclean -C lib/
+	@make fclean -C asm/
+	@make fclean -C corewar/
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all asm corewar lib clean fclean re
