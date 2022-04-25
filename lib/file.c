@@ -15,9 +15,11 @@ char *getline_file(char *filepath)
     ssize_t byte = 0;
     FILE *file = fopen(filepath, "r");
 
-    if (file == NULL)
+    if (file == NULL) {
+        free(buffer);
         return (NULL);
-    buffer[0] = '\0';
+    }
+    buffer = my_memset(buffer, 0, sizeof(buffer));
     byte = getline(&line, &size, file);
     while (byte >= 0) {
         my_strcat(&buffer, line);
