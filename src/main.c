@@ -17,11 +17,8 @@ int main(int ac, char **av)
 {
     corewar_t *cor = malloc(sizeof(corewar_t));
 
-    if (cor == NULL)
-        return (84);
+    arg_handler(cor, ac, av);
     cor = init_struct(cor);
-    if (cor == NULL)
-        return (84);
     free_all(cor);
     return (0);
 }

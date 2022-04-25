@@ -16,3 +16,4 @@ typedef struct corewar_s {
 
 #endif
 void free_all(corewar_t *cor);
+void arg_handler(corewar_t *cor, int argc, char **argv);
