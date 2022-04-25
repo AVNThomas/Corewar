@@ -24,7 +24,7 @@ void percent_p(va_list arglist)
     uintptr_t nb = va_arg(arglist, uintptr_t);
     char *buffer = malloc(sizeof(char) * 11);
 
-    for (i; nb != 0; i++) {
+    for (; nb != 0; i++) {
         rest = nb % 16;
         if (rest >= 10) {
             buffer[i] = rest - 10 + 'a';
@@ -47,7 +47,7 @@ void percent_x(va_list arglist)
     int nb = va_arg(arglist, int);
     char *buffer = malloc(sizeof(char) * nb);
 
-    for (i; nb != 0; i++) {
+    for (; nb != 0; i++) {
         rest = nb % 16;
         if (rest >= 10) {
             buffer[i] = rest - 10 + 'a';
