@@ -52,3 +52,4 @@ int my_char_is_alpha_inf(char c);
 int my_putchar(char c);
 void print_darray(char **darray);
 void my_putnbr_float(float value);
+char *my_revstr(char *str);

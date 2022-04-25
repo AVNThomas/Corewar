@@ -24,12 +24,14 @@ typedef struct free_s {
 #endif
 
 void percent_c(va_list arglist);
+void percent_x(va_list arglist);
 void percent_d_i(va_list arglist);
 void percent_s(va_list arglist);
 void percent_a(va_list arglist);
 void percent(va_list arglist);
 void percent_f(va_list arglist);
 void percent_e(va_list arglist);
+void percent_p(va_list arglist);
 void free_str(va_list arglist);
 void free_darray(va_list arglist);
 void free_struct(va_list arglist);
