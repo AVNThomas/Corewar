@@ -7,10 +7,17 @@
 
 NAME	=	libmy.a
 
-SRC	=	$(wildcard *.c) \
+SRC	=	$(wildcard *.c)\
 		$(wildcard printf/*.c)
-OBJ	=	$(SRC:.c=.o)
-CPPFLAGS = -I../include/
+
+CFLAGS	=	-I../include/ -Wall -Wextra -Wpedantic
+
+OBJ_DIR	=	.obj/
+OBJ = $(addprefix ${OBJ_DIR}, $(SRC:.c=.o))
+
+${OBJ_DIR}%.o : %.c
+	@mkdir -p ${@D}
+	$(CC) -c ${CFLAGS} $< -o $@
 
 all: $(NAME)
 
@@ -18,7 +25,7 @@ $(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ)
 
 clean:
-	rm -rf $(OBJ)
+	rm -rf $(OBJ_DIR)
 
 fclean:	clean
 	rm -rf $(NAME)
