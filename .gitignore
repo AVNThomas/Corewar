@@ -1,0 +1,7 @@
+asm/asm
+corewar/corewar
+a.out
+*.a
+#*#
+*~
+*.o
