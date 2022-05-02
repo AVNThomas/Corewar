@@ -9,4 +9,6 @@
     #define _ASM_H
     #include "my.h"
     #include "printf.h"
+    #define EXIT_ERR 84
+    #define EXIT_OK 0
 #endif
