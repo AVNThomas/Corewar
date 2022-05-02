@@ -6,6 +6,8 @@
 */
 
 #include "../include/asm.h"
+#include <stdlib.h>
+#include <unistd.h>
 
 static int helper(char *prog, int ret_val)
 {
@@ -24,14 +26,14 @@ static int check_arg (int ac, char **argv)
     return (EXIT_OK);
 }
 
-static FILE *open_file(char *filepath)
+static int open_file(char *filepath)
 {
-    FILE *file = 0;
+    int file = 0;
 
-    file = fopen(filepath, "r");
-    if (file == NULL) {
+    file = open(filepath, O_RDONLY);
+    if (file == -1) {
         my_printf("Error while opening file %s\n", filepath);
-        return (NULL);
+        return (-1);
     }
     return (file);
 }
@@ -39,13 +41,13 @@ static FILE *open_file(char *filepath)
 int main (int ac, char **argv)
 {
     int ret_stat = 0;
-    FILE *file = 0;
+    int file = 0;
 
     if (check_arg(ac, argv) != 0)
         return (EXIT_ERR);
     file = open_file(argv[1]);
-    if (file == NULL)
+    if (file == -1)
         return (EXIT_ERR);
-    fclose(file);
+    close(file);
     return (ret_stat);
 }
