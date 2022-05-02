@@ -10,7 +10,6 @@
 #include <criterion/internal/test.h>
 #include "../include/my.h"
 #include "../include/asm.h"
-#include "../include/corewar.h"
 
 Test(group_of_test, test_name)
 {

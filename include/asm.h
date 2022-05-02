@@ -7,6 +7,6 @@
 
 #ifndef _ASM_H
     #define _ASM_H
-
-#endif // !_ASM_H
-
+    #include "my.h"
+    #include "printf.h"
+#endif

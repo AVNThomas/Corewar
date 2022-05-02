@@ -29,5 +29,6 @@ void percent_a(va_list arglist)
 
 void percent(va_list arglist)
 {
+    arglist = arglist;
     my_putchar('%');
 }

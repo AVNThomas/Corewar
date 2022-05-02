@@ -28,4 +28,8 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all asm corewar lib clean fclean re
+tests_run:
+	@ make tests_run -C asm
+	@ make tests_run -C corewar
+
+.PHONY: all asm corewar lib clean fclean re tests_run

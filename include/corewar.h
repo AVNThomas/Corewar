@@ -7,5 +7,6 @@
 
 #ifndef _COREWAR_H_
     #define _COREWAR_H_
-
-#endif // _COREWAR_H_
+    #include "my.h"
+    #include "printf.h"
+#endif

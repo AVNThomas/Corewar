@@ -13,7 +13,7 @@ static int helper(char *prog, int ret_val)
     my_printf("USAGE:\n%s [-h] filename.[s]\n", prog);
     my_printf("DESCRIPTION:\nCompile filename.s to ");
     my_printf("filename.core for corewar Virtual Machine\n");
-    return(ret_val);
+    return (ret_val);
 }
 
 static int check_arg (int ac, char **argv)
@@ -24,6 +24,7 @@ static int check_arg (int ac, char **argv)
         helper(argv[0], 0);
     return (0);
 }
+
 int main (int ac, char **argv)
 {
     int ret_stat = check_arg(ac, argv);
