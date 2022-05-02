@@ -6,3 +6,5 @@ a.out
 *~
 *.o
 vgcore*
+op.h
+op.c
