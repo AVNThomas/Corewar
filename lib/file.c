@@ -7,25 +7,25 @@
 
 #include "../include/my.h"
 
-char *getline_file(char *filepath)
+char *getline_file(FILE *file)
 {
     char *buffer = malloc(sizeof(char));
     char *line = NULL;
     long unsigned int size = 0;
     ssize_t byte = 0;
-    FILE *file = fopen(filepath, "r");
 
+    if (buffer == NULL)
+        return (NULL);
     if (file == NULL) {
         free(buffer);
         return (NULL);
     }
-    buffer = my_memset(buffer, 0, sizeof(buffer));
+    buffer = my_memset(buffer, 0, sizeof(char));
     byte = getline(&line, &size, file);
     while (byte >= 0) {
-        my_strcat(&buffer, line);
+        buffer = my_strcat_malloc(buffer, line);
         byte = getline(&line, &size, file);
     }
-    fclose(file);
     free(line);
     return (buffer);
 }

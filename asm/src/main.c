@@ -6,14 +6,14 @@
 */
 
 #include "../include/asm.h"
+#include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 
 static int helper(char *prog, int ret_val)
 {
     my_printf("USAGE:\n%s [-h] filename.[s]\n", prog);
     my_printf("DESCRIPTION:\nCompile filename.s to ");
-    my_printf("filename.core for corewar Virtual Machine\n");
+    my_printf("filename.cor for corewar Virtual Machine\n");
     return (ret_val);
 }
 
@@ -26,28 +26,34 @@ static int check_arg (int ac, char **argv)
     return (EXIT_OK);
 }
 
-static int open_file(char *filepath)
+static FILE *open_file(char const *filepath)
 {
-    int file = 0;
+    FILE *file = 0;
 
-    file = open(filepath, O_RDONLY);
-    if (file == -1) {
+    file = fopen(filepath, "r");
+    if (file == NULL) {
         my_printf("Error while opening file %s\n", filepath);
-        return (-1);
+        return (NULL);
     }
     return (file);
 }
 
 int main (int ac, char **argv)
 {
-    int ret_stat = 0;
-    int file = 0;
+    int ret_stat = EXIT_OK;
+    FILE *file = NULL;
+    char *name = NULL;
 
     if (check_arg(ac, argv) != 0)
         return (EXIT_ERR);
     file = open_file(argv[1]);
-    if (file == -1)
+    if (file == NULL)
         return (EXIT_ERR);
-    close(file);
+    name = get_filename(argv[1]);
+    if (name == NULL)
+        return (EXIT_ERR);
+    ret_stat = compile_asm(file, name);
+    free(name);
+    fclose(file);
     return (ret_stat);
 }

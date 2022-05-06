@@ -10,6 +10,12 @@ NAME	=	asm
 CC	=	gcc
 
 SRCS	=	src/main.c\
+		 src/get_filename.c\
+		 src/compile_asm.c\
+		 src/name_header.c\
+		 src/comment_header.c\
+		 src/magic_header.c\
+		 src/write_header.c
 
 SRCS_TEST	=	tests/tests_asm.c\
 
@@ -44,6 +50,7 @@ tests_run: ${OBJ_TEST}
 clean:
 	rm -rf ${OBJ_DIR}
 	rm -rf vgcore*
+	rm -rf *.cor
 
 fclean: clean
 	rm -rf ${NAME}

@@ -1,21 +1,16 @@
 /*
 ** EPITECH PROJECT, 2022
-** my_essential
+** memset
 ** File description:
-** my_memset
+** memset
 */
 
-#include "../include/my.h"
+#include <stddef.h>
 
-void *my_memset(void *to_set, int character, size_t len)
+void *my_memset (void *dest, int val, size_t len)
 {
-    char *str = to_set;
-    unsigned char chara = character;
-
-    while (len > 0) {
-        *str = chara;
-        str++;
-        len--;
-    }
-    return (to_set);
+    unsigned char *ptr = dest;
+    while (len-- > 0)
+        *ptr++ = val;
+    return dest;
 }

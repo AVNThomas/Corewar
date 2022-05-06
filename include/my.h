@@ -16,7 +16,6 @@
     #include <sys/types.h>
     #include <sys/stat.h>
     #include <sys/wait.h>
-#endif
 
 int my_abs(int nb);
 int my_atoi(char const *str);
@@ -29,7 +28,8 @@ void my_putnbr_int(int number);
 int my_putstr(char const *str);
 char *my_strncpy(char *dest, const char *src, int n);
 char **my_stwa(char const *str, char del);
-void my_strcat(char **dest, char const *src);
+char *my_strcat(char *dest, char const *src);
+char *my_strcat_malloc(char *dest, char const *src);
 int my_strcmp(char const *s1 , char const *s2);
 char *my_strcpy(char *dest, char const *src);
 int my_strlen(char const *str);
@@ -38,7 +38,7 @@ void free_double_array(char **darray);
 int **alloc_dstar_int(int nb_l, int nb_c, int **to_alloc);
 void free_dint_array(int **darray, int nb_line);
 void *my_memset(void *to_set, int character, size_t len);
-char *getline_file(char *filepath);
+char *getline_file(FILE *file);
 int write_in_file(char const *filename, char const *data);
 char *stat_file(char *filepath);
 int my_str_is_num(char *str);
@@ -53,3 +53,5 @@ int my_putchar(char c);
 void print_darray(char **darray);
 void my_putnbr_float(float value);
 char *my_revstr(char *str);
+char **my_splitter(char *str, char split);
+#endif
