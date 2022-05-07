@@ -9,13 +9,13 @@ NAME	=	asm
 
 CC	=	gcc
 
-SRCS	=	src/main.c\
-		 src/get_filename.c\
-		 src/compile_asm.c\
-		 src/name_header.c\
-		 src/comment_header.c\
-		 src/magic_header.c\
-		 src/write_header.c
+SRCS	=	src/compile_prog.c\
+		src/generate_core.c\
+		src/generate_header.c\
+		src/main.c\
+		src/write_core.c\
+
+
 
 SRCS_TEST	=	tests/tests_asm.c\
 

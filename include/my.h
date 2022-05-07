@@ -53,5 +53,6 @@ int my_putchar(char c);
 void print_darray(char **darray);
 void my_putnbr_float(float value);
 char *my_revstr(char *str);
-char **my_splitter(char *str, char split);
+char **my_spliter(char *str, char split);
+int d2_arr_size(char **tab);
 #endif

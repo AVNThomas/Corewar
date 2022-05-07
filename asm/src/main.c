@@ -38,6 +38,29 @@ static FILE *open_file(char const *filepath)
     return (file);
 }
 
+static char *get_filename(char const *path)
+{
+    int size = my_strlen(path) + my_strlen(".cor\0") + 1;
+    char *name = malloc(sizeof(char) * size);
+
+    if (name == NULL)
+        return (NULL);
+    if (path == NULL) {
+        free(name);
+        return (NULL);
+    }
+    name = my_memset(name, 0, size);
+    name = my_strcpy(name, path);
+    for (int i = 0; name[i] != '\0'; i++)
+        if (name[i + 1] != '\0' && name[i] == '.') {
+            name[i + 1] = '.';
+            name[i] = '\0';
+        }
+    name = my_strcat(name, ".cor");
+
+    return (name);
+}
+
 int main (int ac, char **argv)
 {
     int ret_stat = EXIT_OK;
@@ -46,13 +69,15 @@ int main (int ac, char **argv)
 
     if (check_arg(ac, argv) != 0)
         return (EXIT_ERR);
-    file = open_file(argv[1]);
-    if (file == NULL)
-        return (EXIT_ERR);
     name = get_filename(argv[1]);
     if (name == NULL)
         return (EXIT_ERR);
-    ret_stat = compile_asm(file, name);
+    file = open_file(argv[1]);
+    if (file == NULL) {
+        free(name);
+        return (EXIT_ERR);
+    }
+    ret_stat = generate_core(file, name);
     free(name);
     fclose(file);
     return (ret_stat);

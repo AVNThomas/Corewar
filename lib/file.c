@@ -59,3 +59,12 @@ int write_in_file(char const *filename, char const *data)
     close(file_d);
     return (0);
 }
+
+int d2_arr_size(char **tab)
+{
+    int i = 0;
+    if (tab == NULL)
+        return (0);
+    for (; tab[i] != NULL; i++);
+    return (i);
+}
