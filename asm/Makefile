@@ -10,6 +10,7 @@ NAME	=	asm
 CC	=	gcc
 
 SRCS	=	src/compile_prog.c\
+		src/find_line.c\
 		src/generate_core.c\
 		src/generate_header.c\
 		src/main.c\
