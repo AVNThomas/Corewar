@@ -23,6 +23,6 @@ int magic_header(int *header);
 int name_header(char **asm_buff, char *name);
 int comment_header(char **asm_buff, char *comment);
 header_t *generate_header(header_t *header, char *asm_buff);
-
+char *find_line(char *header, char **tab, char *search);
 int write_core(int core, header_t *header, op_list_t *list);
 #endif
