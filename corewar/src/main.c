@@ -5,8 +5,7 @@
 ** main
 */
 
-#include "../include/my.h"
-#include "../include/printf.h"
+#include "../include/corewar.h"
 
 static int helper(char *prog, int ret_val)
 {
@@ -35,6 +34,13 @@ static int check_arg (int ac, char **argv)
 
 int main (int ac, char **argv)
 {
+    corewar_t *g = malloc(sizeof(corewar_t));
     int ret_stat = check_arg(ac, argv);
+
+    if (!g)
+        return (84);
+    g = init_struct(g);
+    find_header(g, argv[1]);
+    get_first_function(g, argv[1]);
     return (ret_stat);
 }
