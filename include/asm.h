@@ -15,6 +15,13 @@
     #define EXIT_ERR 84
     #define EXIT_OK 0
 
+typedef struct asm_list_s {
+    char *line;
+    int size;
+    op_t asm_line;
+    struct asm_list_s *next;
+} asm_list_t;
+
 int generate_core(FILE *file, char const *name);
 
 op_list_t *compile_core(op_list_t *list, char const *name);
