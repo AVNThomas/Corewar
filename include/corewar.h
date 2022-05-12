@@ -24,5 +24,8 @@ typedef struct corewar_s {
 }corewar_t;
 
 corewar_t *init_struct(corewar_t *g);
+int hexa_to_decimal(char *hexa);
 void find_header(corewar_t *g, char *file);
 void get_first_function(corewar_t *g, char *file);
+int decimal_to_binary(int decimal);
+int hexa_to_decimal2(int hexa);
