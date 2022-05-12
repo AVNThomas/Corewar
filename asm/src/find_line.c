@@ -43,7 +43,7 @@ char *find_line(char *header, char **tab, char *search)
     for (int i = 0; tab[i] != NULL; i++) {
         tmp = remove_useless_char(tab[i]);
         if (my_strncmp(search, tmp, size) == 0 && check_valid(tmp,
-                                                    LABEL_CHARS)) {
+            LABEL_CHARS)) {
             header = my_strcpy(header, tmp);
             return (header);
         }

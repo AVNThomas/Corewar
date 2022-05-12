@@ -62,10 +62,6 @@ header_t *generate_header(header_t *header, char *asm_buff)
         free_double_array(tab);
         return (NULL);
     }
-// printf("header magic %x\n", header->magic);
-// my_printf("header name %s\n", header->prog_name);
-// my_printf("header size %d\n", header->prog_size);
-// my_printf("header comment %s\n", header->comment);
     free_double_array(tab);
     return (header);
 }

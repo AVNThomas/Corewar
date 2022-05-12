@@ -38,14 +38,18 @@ static int compile_asm(char *asm_buff, int core_fd)
     core_fd = core_fd;
     int ret_stat = EXIT_OK;
     header_t *header = init_header();
+    op_list_t *op_list = NULL;
 
-//op_list_t *op_list = NULL;
     if (header == NULL)
         return (EXIT_ERR);
     header = generate_header(header, asm_buff);
-//op_list = compile_core(op_list, asm_buff);
-//write_core(core_fd, header, op_list);
-    free(header);
+    op_list = compile_core(op_list, asm_buff);
+    if (header == NULL || op_list == NULL) {
+        free(header);
+        // free_list
+        return (EXIT_ERR);
+    }
+    // write_core(int core, header_t *header, op_list_t *list) --> free all elem
     return (ret_stat);
 }
 
