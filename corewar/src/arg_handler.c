@@ -1,0 +1,91 @@
+/*
+** EPITECH PROJECT, 2022
+** B-CPE-201-NCY-2-1-corewar-antoine.khalidy
+** File description:
+** arg_handler
+*/
+
+#include "../include/corewar.h"
+
+static int helper(char *prog, int ret_val)
+{
+    my_printf("USAGE:\n%s [-dump nbr_cycle] [[-n prog_number] ", prog);
+    my_printf("[-a load_address] prog_name]\n");
+    my_printf("DESCRIPTION:\n-dump nbr_cycle dumps the memory after the ");
+    my_printf("nbr_cycle execution (if the round isn’t already over) with ");
+    my_printf("the following format: 32 bytes/line in hexadecimal ");
+    my_printf("(A0BCDEFE1DD3...)\n-n prog_number sets the next program’s ");
+    my_printf("number. By default, the first free number in the parameter ");
+    my_printf("order\n-a load_address sets the next program’s loading ");
+    my_printf("address. When no address is specified, optimize the ");
+    my_printf("addresses so that the processes are as far away from");
+    my_printf("each other as possible. The addresses are MEM_SIZE modulo.\n");
+    return (ret_val);
+}
+
+int arg_n(corewar_t *g, int ac, char **av, int i)
+{
+    printf("-n\n");
+    if (my_str_is_num(av[i + 1])) {
+        i++;
+        g->tmp_nb_player = my_atoi(av[i]);
+        printf("%s\n", av[i]);
+    }
+    return (i);
+}
+
+int arg_a(corewar_t *g, int ac, char **av, int i)
+{
+    printf("-a\n");
+    if (my_str_is_num(av[i + 1])) {
+        i++;
+        g->load_adress = my_atoi(av[i]);
+        printf("%s\n", av[i]);
+    }
+    return (i);
+}
+
+static int dump(corewar_t *g, char **av, int i)
+{
+    if (my_strcmp(av[i], "-dump")) {
+        if (my_str_is_num(av[i + 1]) && my_atoi(av[i + 1]) > 0) {
+            g->nb_cycle = my_atoi(av[i + 1]);
+            printf("-dump %d\n", g->nb_cycle);
+            return (1);
+        } else {
+            return (helper(av[0], 84));
+        }
+    }
+    return (1);
+}
+
+int arg_handler(corewar_t *g, int ac, char **av)
+{
+    g->tmp_nb_player = -1;
+    if (ac == 1)
+        return (helper(av[0], 84));
+    if (ac == 2 && my_strcmp(av[1], "-h"))
+        return (helper(av[0], 0));
+    for (int i = 0; i < ac; i++) {
+        if (dump(g, av, i) == 84)
+            return (84);
+        if (my_strcmp(av[i], "-n"))
+            i = arg_n(g, ac, av, i);
+        if (my_strcmp(av[i], "-a"))
+            i = arg_a(g, ac, av, i);
+        if (my_strncmp(my_revstr(av[i]), "roc.", 4)) {
+            my_revstr(av[i]);
+            printf("Add Node\n");
+            g->nb_player++;
+            if (g->tmp_nb_player != -1) {
+                g->list = add_node(g->list, av[i], g->tmp_nb_player,
+                g->load_adress);
+                g->tmp_nb_player = -1;
+            } else
+                g->list = add_node(g->list, av[i], g->nb_player,
+                g->load_adress);
+            print_list(g->list);
+        }
+    }
+    return (1);
+}

@@ -7,7 +7,7 @@
 
 #include "../include/corewar.h"
 
-static int helper(char *prog, int ret_val)
+int helper(char *prog, int ret_val)
 {
     my_printf("USAGE:\n%s [-dump nbr_cycle] [[-n prog_number] ", prog);
     my_printf("[-a load_address] prog_name]\n");
@@ -23,9 +23,9 @@ static int helper(char *prog, int ret_val)
     return (ret_val);
 }
 
-static int check_arg (int ac, char **argv)
+int check_arg (int ac, char **argv)
 {
-    if (ac > 2 || ac == 1)
+    if (ac == 1)
         return (helper(argv[0], 84));
     if (my_strncmp(argv[1], "-h", my_strlen("-h")) == 0)
         helper(argv[0], 0);
@@ -35,12 +35,19 @@ static int check_arg (int ac, char **argv)
 int main (int ac, char **argv)
 {
     corewar_t *g = malloc(sizeof(corewar_t));
-    int ret_stat = check_arg(ac, argv);
+    int ret_value = 0;
 
     if (!g)
         return (84);
-    g = init_struct(g);
-    find_header(g, argv[1]);
-    get_first_function(g, argv[1]);
-    return (ret_stat);
+    g = my_memset(g, 0, sizeof(corewar_t));
+    ret_value = arg_handler(g, ac, argv);
+    if (ret_value == 84 || ret_value == 0) {
+        free(g);
+        return (ret_value);
+    }
+    // g = init_struct(g);
+    // find_header(g, g->prog_name);
+    // get_first_function(g, g->prog_name);
+
+    return (0);
 }

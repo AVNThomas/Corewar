@@ -10,7 +10,7 @@ NAME	=	libmy.a
 SRC	=	$(wildcard *.c)\
 		$(wildcard printf/*.c)
 
-CFLAGS	=	-I../include/ -Wall -Wextra -Wpedantic
+CFLAGS	=	-I../include/ -Wall -Wextra -Wpedantic -g
 
 OBJ_DIR	=	.obj/
 OBJ = $(addprefix ${OBJ_DIR}, $(SRC:.c=.o))
