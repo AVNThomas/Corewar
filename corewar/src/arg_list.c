@@ -36,3 +36,36 @@ void print_list(args_t *list)
     }
 }
 
+static int arg_n_a(corewar_t *g, char **av, int i)
+{
+    if (my_strcmp(av[i], "-n")) {
+        i = arg_n(g, av, i);
+        if (i == -1)
+            return (-1);
+    }
+    if (my_strcmp(av[i], "-a")) {
+        i = arg_a(g, av, i);
+        if (i == -1)
+            return (-1);
+    }
+    return (i);
+}
+
+int arg_list_handler(corewar_t *g, char **av, int i)
+{
+    i = arg_n_a(g, av, i);
+    if (i == -1)
+        return (-1);
+    if (my_strncmp(my_revstr(av[i]), "roc.", 4)) {
+        my_revstr(av[i]);
+        g->nb_player++;
+        if (g->tmp_nb_player != -1) {
+            g->list = add_node(g->list, av[i], g->tmp_nb_player,
+            g->load_adress);
+            g->tmp_nb_player = -1;
+        } else
+            g->list = add_node(g->list, av[i], g->nb_player, g->load_adress);
+        // print_list(g->list);
+    }
+    return (i);
+}

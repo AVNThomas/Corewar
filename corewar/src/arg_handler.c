@@ -23,25 +23,23 @@ static int helper(char *prog, int ret_val)
     return (ret_val);
 }
 
-int arg_n(corewar_t *g, int ac, char **av, int i)
+int arg_n(corewar_t *g, char **av, int i)
 {
-    printf("-n\n");
     if (my_str_is_num(av[i + 1])) {
         i++;
         g->tmp_nb_player = my_atoi(av[i]);
-        printf("%s\n", av[i]);
-    }
+    } else if (my_str_is_alpha_num(av[i + 1]))
+        return (-1);
     return (i);
 }
 
-int arg_a(corewar_t *g, int ac, char **av, int i)
+int arg_a(corewar_t *g, char **av, int i)
 {
-    printf("-a\n");
     if (my_str_is_num(av[i + 1])) {
         i++;
         g->load_adress = my_atoi(av[i]);
-        printf("%s\n", av[i]);
-    }
+    } else if (my_str_is_alpha_num(av[i + 1]))
+        return (-1);
     return (i);
 }
 
@@ -50,7 +48,6 @@ static int dump(corewar_t *g, char **av, int i)
     if (my_strcmp(av[i], "-dump")) {
         if (my_str_is_num(av[i + 1]) && my_atoi(av[i + 1]) > 0) {
             g->nb_cycle = my_atoi(av[i + 1]);
-            printf("-dump %d\n", g->nb_cycle);
             return (1);
         } else {
             return (helper(av[0], 84));
@@ -66,26 +63,13 @@ int arg_handler(corewar_t *g, int ac, char **av)
         return (helper(av[0], 84));
     if (ac == 2 && my_strcmp(av[1], "-h"))
         return (helper(av[0], 0));
-    for (int i = 0; i < ac; i++) {
+    for (int i = 1; i < ac; i++) {
         if (dump(g, av, i) == 84)
             return (84);
-        if (my_strcmp(av[i], "-n"))
-            i = arg_n(g, ac, av, i);
-        if (my_strcmp(av[i], "-a"))
-            i = arg_a(g, ac, av, i);
-        if (my_strncmp(my_revstr(av[i]), "roc.", 4)) {
-            my_revstr(av[i]);
-            printf("Add Node\n");
-            g->nb_player++;
-            if (g->tmp_nb_player != -1) {
-                g->list = add_node(g->list, av[i], g->tmp_nb_player,
-                g->load_adress);
-                g->tmp_nb_player = -1;
-            } else
-                g->list = add_node(g->list, av[i], g->nb_player,
-                g->load_adress);
-            print_list(g->list);
-        }
+        i = arg_list_handler(g, av, i);
+        if (i == -1)
+            return (helper(av[0], 84));
+
     }
     return (1);
 }

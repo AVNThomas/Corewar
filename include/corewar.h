@@ -12,7 +12,7 @@
     #include "op.h"
 #endif
 
-typedef struct l_args_s {
+typedef struct args_s {
     char *name;
     int number;
     int load_adress;
@@ -40,8 +40,10 @@ int hexa_to_decimal(char *hexa);
 void find_header(corewar_t *g, char *file);
 void get_first_function(corewar_t *g, char *file);
 int decimal_to_binary(int decimal);
+int arg_n(corewar_t *g, char **av, int i);
+int arg_a(corewar_t *g, char **av, int i);
 int hexa_to_decimal2(int hexa);
 int arg_handler(corewar_t *g, int ac, char **av);
-
+int arg_list_handler(corewar_t *g, char **av, int i);
 args_t *add_node(args_t *list, char *name, int nb_player, int address);
 void print_list(args_t *list);
