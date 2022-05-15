@@ -65,7 +65,6 @@ int arg_list_handler(corewar_t *g, char **av, int i)
             g->tmp_nb_player = -1;
         } else
             g->list = add_node(g->list, av[i], g->nb_player, g->load_adress);
-        // print_list(g->list);
     }
     return (i);
 }

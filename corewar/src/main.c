@@ -45,9 +45,14 @@ int main (int ac, char **argv)
         free(g);
         return (ret_value);
     }
-    // g = init_struct(g);
-    // find_header(g, g->prog_name);
-    // get_first_function(g, g->prog_name);
+    g = init_struct(g);
+    my_printf("\n");
+    while (g->list != NULL) {
+        my_printf("\nTest : %s\n", g->list->name);
+        find_header(g, g->list->name);
+        get_first_function(g, g->list->name);
+        g->list = g->list->next;
+    }
 
     return (0);
 }

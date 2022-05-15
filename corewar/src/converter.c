@@ -27,7 +27,6 @@ int hexa_to_decimal2(int hexa)
         hexa /= 10;
         i++;
     }
-    printf("%d\n", decimal);
     return (decimal);
 }
 
@@ -43,7 +42,6 @@ int hexa_to_decimal(char *hexa)
         else if (hexa[i] >= 'A' && hexa[i] <= 'F')
             decimal = decimal * 16 + (hexa[i] - 'A' + 10);
     }
-    printf("%d\n", decimal);
     return (decimal);
 }
 
@@ -61,6 +59,5 @@ int decimal_to_binary(int decimal)
     my_revstr(buffer);
     binary = my_atoi(buffer);
     free(buffer);
-    printf("%d\n", binary);
     return (binary);
 }
