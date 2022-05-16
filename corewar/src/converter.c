@@ -49,7 +49,7 @@ int decimal_to_binary(int decimal)
 {
     int i = 0;
     int binary = 0;
-    char *buffer = malloc(sizeof(char) * decimal);
+    char *buffer = malloc(sizeof(char) * (decimal + 1));
 
     for (; decimal != 0; i++) {
         buffer[i] = (decimal % 2) + '0';

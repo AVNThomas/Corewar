@@ -14,13 +14,14 @@
 
 typedef struct champions_s {
     char *name;
+    char *comment;
     int number;
     FILE *ptr;
     struct champions_s *next;
 } champions_t;
 
 typedef struct vm_s {
-
+    champions_t *champ;
 } vm_t;
 
 typedef struct args_s {
@@ -59,3 +60,9 @@ int arg_handler(corewar_t *g, int ac, char **av);
 int arg_list_handler(corewar_t *g, char **av, int i);
 args_t *add_node(args_t *list, char *name, int nb_player, int address);
 void print_list(args_t *list);
+champions_t *add_champ(champions_t *list, vm_header_t *header, args_t *arg);
+void free_header(vm_header_t *header);
+void print_champ(champions_t *champ);
+void free_champ(champions_t *champ);
+void free_arg(args_t *arg);
+void free_all(corewar_t *g);
