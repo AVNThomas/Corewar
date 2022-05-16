@@ -18,7 +18,6 @@ static asm_list_t *check_asm_line(char *line, asm_list_t *list)
     if (my_strncmp(COMMENT_CMD_STRING, line, size_comment) == 0 ||
         my_strncmp(NAME_CMD_STRING, line, size_name) == 0)
         return (0);
-    printf("%x    %s\n", line[0], line);
     list = add_nod_list(list, line);
     if (list == NULL) {
         return (NULL);
