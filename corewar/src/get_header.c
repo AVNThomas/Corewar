@@ -10,7 +10,6 @@
 void find_header(corewar_t *g, char *file)
 {
     int comment_pos = PROG_NAME_LENGTH + 8;
-    int size = 0;
     FILE *ptr = fopen(file, "rb");
 
     fread(&g->header->magic, 4, 1, ptr);

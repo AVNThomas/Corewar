@@ -53,6 +53,6 @@ int main (int ac, char **argv)
         get_first_function(g, g->list->name);
         g->list = g->list->next;
     }
-
+    
     return (0);
 }

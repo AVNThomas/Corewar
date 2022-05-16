@@ -12,6 +12,17 @@
     #include "op.h"
 #endif
 
+typedef struct champions_s {
+    char *name;
+    int number;
+    FILE *ptr;
+    struct champions_s *next;
+} champions_t;
+
+typedef struct vm_s {
+
+} vm_t;
+
 typedef struct args_s {
     char *name;
     int number;
@@ -33,6 +44,7 @@ typedef struct corewar_s {
     int load_adress;
     int tmp_nb_player;
     args_t *list;
+    vm_t *vm;
 }corewar_t;
 
 corewar_t *init_struct(corewar_t *g);
