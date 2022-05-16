@@ -9,11 +9,13 @@
 
 void free_linked_list(asm_list_t *list)
 {
+    my_printf("%p\n", list->next);
     asm_list_t *stock = NULL;
 
     while (list != NULL) {
         stock = list;
         list = list->next;
+        free(stock->line);
         free(stock);
     }
 }
@@ -59,7 +61,8 @@ asm_list_t *add_nod_list(asm_list_t *list, char *line)
     if (nod == NULL)
         return (NULL);
     backup = list;
-    nod->line = line;
+    nod->line = NULL;
+    nod->line = my_strcpy_malloc(nod->line, line);
     nod->next = NULL;
     if (list == NULL)
         return (nod);

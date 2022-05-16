@@ -24,7 +24,7 @@ typedef struct asm_list_s {
 
 int generate_core(FILE *file, char const *name);
 
-op_list_t *compile_core(op_list_t *list, char *asm_buff);
+asm_list_t *compile_core(asm_list_t *list, char *asm_buff);
 
 int magic_header(int *header);
 int name_header(char **asm_buff, char *name);

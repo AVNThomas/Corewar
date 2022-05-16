@@ -32,6 +32,7 @@ char *my_strcat(char *dest, char const *src);
 char *my_strcat_malloc(char *dest, char const *src);
 int my_strcmp(char const *s1 , char const *s2);
 char *my_strcpy(char *dest, char const *src);
+char *my_strcpy_malloc(char *dest, char const *src);
 int my_strlen(char const *str);
 int my_strncmp(char const *s1 , char const *s2 , int n);
 void free_double_array(char **darray);
