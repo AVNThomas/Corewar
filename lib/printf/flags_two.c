@@ -33,7 +33,7 @@ void percent_p(va_list arglist)
         }
         nb /= 16;
     }
-    buffer[i] = '\0';
+    buffer[i - 1] = '\0';
     my_revstr(buffer);
     my_putstr("0x");
     my_putstr(buffer);
@@ -61,7 +61,7 @@ void percent_x(va_list arglist)
     int i = 0;
     int rest = 0;
     int nb = va_arg(arglist, int);
-    char *buffer = malloc(sizeof(char) * nb);
+    char *buffer = malloc(sizeof(char) * (nb + 1));
 
     for (; nb != 0; i++) {
         rest = nb % 16;
