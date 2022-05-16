@@ -17,6 +17,7 @@ SRCS	=	src/compile_prog.c\
 		src/write_core.c\
 		src/linked_list.c\
 		src/pars_linked_list.c\
+		src/op.c\
 
 SRCS_TEST	=	tests/tests_asm.c\
 

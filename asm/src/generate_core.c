@@ -50,6 +50,7 @@ static int compile_asm(char *asm_buff, int core_fd)
         free(header);
         return (EXIT_ERR);
     }
+    pars_code_list(list, op_tab);
     free(header);
     free_linked_list(list);
     // write_core(int core, header_t *header, op_list_t *list) --> free all elem
