@@ -7,7 +7,7 @@
 
 #include "../include/printf.h"
 
-static printf_t flags[10]  = {
+static printf_t flags[11]  = {
     {'d', &percent_d_i},
     {'i', &percent_d_i},
     {'s', &percent_s},
@@ -18,11 +18,12 @@ static printf_t flags[10]  = {
     {'e', &percent_e},
     {'p', &percent_p},
     {'x', &percent_x},
+    {'b', &percent_b},
 };
 
 static void call_percent(va_list arglist, char percent)
 {
-    for (int i = 0; i <= 10; i++) {
+    for (int i = 0; i <= 11; i++) {
         if (flags[i].percent == percent) {
             flags[i].func(arglist);
             return;

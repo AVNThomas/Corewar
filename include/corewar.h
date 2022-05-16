@@ -12,6 +12,10 @@
     #include "op.h"
 #endif
 
+typedef struct func_size_s {
+    char arg[4];
+} func_size_t;
+
 typedef struct vm_header_s {
     int magic;
     char *name;

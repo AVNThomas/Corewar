@@ -37,3 +37,4 @@ void free_darray(va_list arglist);
 void free_struct(va_list arglist);
 void my_free(char *str, ...);
 void my_printf(char *str, ...);
+void percent_b(va_list arglist);
