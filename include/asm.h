@@ -31,10 +31,10 @@ int name_header(char **asm_buff, char *name);
 int comment_header(char **asm_buff, char *comment);
 header_t *generate_header(header_t *header, char *asm_buff);
 char *find_line(char *header, char **tab, char *search);
-int write_core(int core, header_t *header, op_list_t *list);
+int write_core(int core, header_t *header, asm_list_t *list);
 asm_list_t *add_nod_list(asm_list_t *list, char *line);
 int search_list_char(asm_list_t *list, char *word);
 void free_linked_list(asm_list_t *list);
-int pars_code_list(asm_list_t *list, op_t **tab);
+int pars_code_list(asm_list_t *list);
 
 #endif
