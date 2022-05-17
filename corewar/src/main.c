@@ -49,10 +49,10 @@ int main (int ac, char **argv)
     while (g->list != NULL) {
         find_header(g, g->list->name);
         get_first_function(g, g->list->name);
-        g->vm->champ = add_champ(g->vm->champ, g->header, g->list);
+        g->champ = add_champ(g->champ, g->header, g->list);
         g->list = g->list->next;
     }
-    print_champ(g->vm->champ);
+    print_champ(g->champ);
     free_all(g);
     return (0);
 }

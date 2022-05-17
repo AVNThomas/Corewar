@@ -13,6 +13,10 @@ champions_t *init_node(champions_t *champ)
     champ->name = malloc(sizeof(char) * (PROG_NAME_LENGTH + 1));
     champ->number = 0;
     champ->ptr = NULL;
+    champ->cycles = 0;
+    champ->instruction = 0;
+    for (int i = 0; i <= 4; i++)
+        champ->instru[i].value = 0;
     champ->next = NULL;
     return (champ);
 }
@@ -29,15 +33,20 @@ champions_t *add_value(champions_t *list, vm_header_t *header, args_t *arg)
 
 champions_t *add_champ(champions_t *list, vm_header_t *header, args_t *arg)
 {
-    champions_t *new = malloc(sizeof(champions_t));
     champions_t *tmp = list;
+    champions_t *new = malloc(sizeof(champions_t));
 
+    if (!list) {
+        list = malloc(sizeof(champions_t));
+        list = init_node(list);
+        list = add_value(list, header, arg);
+        free(new);
+        return (list);
+    }
+    while (tmp->next)
+        tmp = tmp->next;
     new = init_node(new);
     new = add_value(new, header, arg);
-    if (list == NULL)
-        return (new);
-    while (tmp->next != NULL)
-        tmp = tmp->next;
     tmp->next = new;
     return (list);
 }

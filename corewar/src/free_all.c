@@ -10,7 +10,7 @@
 void free_all(corewar_t *g)
 {
     free_arg(g->list);
-    free_champ(g->vm->champ);
+    free_champ(g->champ);
     free_header(g->header);
     my_free("tt", g->vm, g);
 }

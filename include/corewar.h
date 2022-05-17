@@ -12,17 +12,21 @@
     #include "op.h"
 #endif
 
+typedef struct instruction_s {
+    char rid;
+    int value;
+} instruction_t;
+
 typedef struct champions_s {
     char *name;
     char *comment;
     int number;
     FILE *ptr;
+    int cycles;
+    int instruction;
+    instruction_t instru[4];
     struct champions_s *next;
 } champions_t;
-
-typedef struct vm_s {
-    champions_t *champ;
-} vm_t;
 
 typedef struct args_s {
     char *name;
@@ -45,7 +49,8 @@ typedef struct corewar_s {
     int load_adress;
     int tmp_nb_player;
     args_t *list;
-    vm_t *vm;
+    FILE *vm;
+    champions_t *champ;
 }corewar_t;
 
 corewar_t *init_struct(corewar_t *g);
