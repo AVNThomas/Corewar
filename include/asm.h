@@ -36,7 +36,6 @@ asm_list_t *add_nod_list(asm_list_t *list, char *line);
 int search_list_char(asm_list_t *list, char *word);
 void free_linked_list(asm_list_t *list);
 int pars_code_list(asm_list_t *list);
-int check_register(char *word);
 int check_type(char *word);
 
 #endif
