@@ -28,6 +28,9 @@ typedef struct champions_s {
     int cycles;
     int instruction;
     instruction_t instru[4];
+    int registre[REG_NUMBER];
+    char *comment;
+    int number;
     struct champions_s *next;
 } champions_t;
 
@@ -59,7 +62,7 @@ typedef struct corewar_s {
 corewar_t *init_struct(corewar_t *g);
 int hexa_to_decimal(char *hexa);
 void find_header(corewar_t *g, char *file);
-void get_first_function(corewar_t *g, char *file);
+void get_first_function(char *file);
 int decimal_to_binary(int decimal);
 int get_arg_alone(int function, FILE *ptr);
 func_size_t *get_func_arg(int bitmask);

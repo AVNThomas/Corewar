@@ -48,7 +48,7 @@ int main (int ac, char **argv)
     g = init_struct(g);
     while (g->list != NULL) {
         find_header(g, g->list->name);
-        get_first_function(g, g->list->name);
+        get_first_function(g->list->name);
         g->champ = add_champ(g->champ, g->header, g->list);
         g->list = g->list->next;
     }

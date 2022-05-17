@@ -7,7 +7,7 @@
 
 #include "../include/corewar.h"
 
-int find_function(corewar_t *g, int mnemonic)
+int find_function(int mnemonic)
 {
     int i = 0;
 
@@ -18,15 +18,14 @@ int find_function(corewar_t *g, int mnemonic)
     return (-1);
 }
 
-int get_function(corewar_t *g, FILE *ptr)
+int get_function(FILE *ptr)
 {
     int mnemonic = 0;
     int function = 0;
 
     fread(&mnemonic, 1, 1, ptr);
-    function = find_function(g, mnemonic);
+    function = find_function(mnemonic);
     if (function == -1) {
-        my_putstr("Error: unknown mnemonic\n");
         return (-1);
     }
     return (function);
@@ -51,13 +50,13 @@ int get_arg_alone(int function, FILE *ptr)
     return (arg);
 }
 
-int get_all_function(corewar_t *g, FILE *ptr)
+int get_all_function(FILE *ptr)
 {
     int function = 0;
     int bitmask = 0;
     func_size_t *func_size = NULL;
 
-    function = get_function(g, ptr);
+    function = get_function(ptr);
     if (function == -1 )
         return (-1);
     if (op_tab[function].nbr_args != 1 || op_tab[function].code == 16)
@@ -70,14 +69,12 @@ int get_all_function(corewar_t *g, FILE *ptr)
     return (0);
 }
 
-void get_first_function(corewar_t *g, char *file)
+void get_first_function(char *file)
 {
     FILE *ptr = fopen(file, "rb");
     int pos = PROG_NAME_LENGTH + COMMENT_LENGTH + 16;
-    int value = 0;
-    int func = 0;
 
     fseek(ptr, pos, SEEK_SET);
-    while (get_all_function(g, ptr) != -1);
+    while (get_all_function(ptr) != -1);
     fclose(ptr);
 }
