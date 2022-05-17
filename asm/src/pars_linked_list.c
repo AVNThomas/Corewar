@@ -10,23 +10,23 @@
 static int pars_code(asm_list_t *list)
 {
     char **line = my_spliter(list->line, ' ');
-    int flag = 0;
     int j = 0;
 
+    list->position = -1;
     if (line == NULL)
         return (EXIT_ERR);
-    for (int i = 0; flag == 0 && line[j] != NULL; i++) {
+    for (int i = 0; list->position == -1 && line[j] != NULL; i++) {
         if (op_tab[i].nbr_args == 0) {
             i = 0;
             j++;
         }
         if (my_strcmp(op_tab[i].mnemonique, line[j]) == 1) {
             list->asm_line = op_tab[i];
-            flag = 1;
+            list->position = j;
         }
     }
     free_double_array(line);
-    if (flag == 0)
+    if (list->position == -1)
         return (EXIT_ERR);
     return (0);
 }
