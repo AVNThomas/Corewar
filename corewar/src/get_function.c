@@ -21,7 +21,6 @@ int find_function(corewar_t *g, int mnemonic)
 int get_function(corewar_t *g, FILE *ptr)
 {
     int mnemonic = 0;
-    int bitmask = 0;
     int function = 0;
 
     fread(&mnemonic, 1, 1, ptr);
@@ -58,7 +57,6 @@ int get_arg_alone(int function, FILE *ptr)
 int get_all_function(corewar_t *g, FILE *ptr)
 {
     int function = 0;
-    char *arg = malloc(sizeof(char) * (g->header->prog_size + 1));
     int bitmask = 0;
     func_size_t *func_size = malloc(sizeof(func_size_t));
 
