@@ -31,6 +31,7 @@ char **my_stwa(char const *str, char del);
 void my_strcat(char **dest, char const *src);
 int my_strcmp(char const *s1 , char const *s2);
 char *my_strcpy(char *dest, char const *src);
+int my_str_is_alpha_num(char *str);
 int my_strlen(char const *str);
 int my_strncmp(char const *s1 , char const *s2 , int n);
 void free_double_array(char **darray);

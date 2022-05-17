@@ -9,8 +9,22 @@
 
 int my_str_is_num(char *str)
 {
+    if (str == NULL)
+        return (0);
     for (int i = 0; str[i] != '\0'; i++) {
         if (str[i] < '0' || str[i] > '9')
+            return (0);
+    }
+    return (1);
+}
+
+int my_str_is_alpha_num(char *str)
+{
+    if (str == NULL)
+        return (0);
+    for (int i = 0; str[i] != '\0'; i++) {
+        if ((str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z')
+        && (str[i] < '0' || str[i] > '9'))
             return (0);
     }
     return (1);

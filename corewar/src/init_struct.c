@@ -9,7 +9,6 @@
 
 corewar_t *init_struct(corewar_t *g)
 {
-    g = my_memset(g, 0, sizeof(corewar_t));
     g->header = malloc(sizeof(vm_header_t));
     g->header = my_memset(g->header, 0, sizeof(vm_header_t));
     g->header->name = malloc(sizeof(char) * (PROG_NAME_LENGTH + 1));

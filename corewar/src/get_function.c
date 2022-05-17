@@ -31,6 +31,7 @@ int get_function(corewar_t *g, FILE *ptr)
         return (-1);
     }
     my_printf("function = %s\n", op_tab[function].mnemonique);
+    my_printf("nb_argument = %d\n", op_tab[function].nbr_args);
     return (function);
 }
 
@@ -76,6 +77,8 @@ void get_first_function(corewar_t *g, char *file)
 {
     FILE *ptr = fopen(file, "rb");
     int pos = PROG_NAME_LENGTH + COMMENT_LENGTH + 16;
+    int value = 0;
+    int func = 0;
 
     fseek(ptr, pos, SEEK_SET);
     while (get_all_function(g, ptr) != -1);
