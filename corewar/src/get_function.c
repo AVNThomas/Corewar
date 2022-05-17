@@ -61,9 +61,9 @@ int get_all_function(corewar_t *g, FILE *ptr)
     func_size_t *func_size = malloc(sizeof(func_size_t));
 
     function = get_function(g, ptr);
-    if (function == -1)
+    if (function == -1 )
         return (-1);
-    if (op_tab[function].nbr_args != 1)
+    if (op_tab[function].nbr_args != 1 || op_tab[function].code == 16)
         fread(&bitmask, 1, 1, ptr);
     else
         bitmask = 0;
