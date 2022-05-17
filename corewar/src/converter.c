@@ -37,9 +37,9 @@ int hexa_to_decimal(char *hexa)
     for (int i = 0; hexa[i] != '\0'; i++) {
         if (hexa[i] >= '0' && hexa[i] <= '9')
             decimal = decimal * 16 + (hexa[i] - '0');
-        else if (hexa[i] >= 'a' && hexa[i] <= 'f')
+        if (hexa[i] >= 'a' && hexa[i] <= 'f')
             decimal = decimal * 16 + (hexa[i] - 'a' + 10);
-        else if (hexa[i] >= 'A' && hexa[i] <= 'F')
+        if (hexa[i] >= 'A' && hexa[i] <= 'F')
             decimal = decimal * 16 + (hexa[i] - 'A' + 10);
     }
     return (decimal);

@@ -5,12 +5,15 @@
 ** corewar
 */
 
-#ifndef _COREWAR_H_
-    #define _COREWAR_H_
-    #include "my.h"
-    #include "printf.h"
-    #include "op.h"
-#endif
+#pragma once
+
+#include "my.h"
+#include "printf.h"
+#include "op.h"
+
+typedef struct func_size_s {
+    char arg[4];
+} func_size_t;
 
 typedef struct args_s {
     char *name;
@@ -40,6 +43,9 @@ int hexa_to_decimal(char *hexa);
 void find_header(corewar_t *g, char *file);
 void get_first_function(corewar_t *g, char *file);
 int decimal_to_binary(int decimal);
+int get_arg_alone(int function, FILE *ptr);
+func_size_t *get_func_arg(int bitmask);
+int get_arg(func_size_t *func_arg, int function, FILE *ptr);
 int arg_n(corewar_t *g, char **av, int i);
 int arg_a(corewar_t *g, char **av, int i);
 int hexa_to_decimal2(int hexa);
