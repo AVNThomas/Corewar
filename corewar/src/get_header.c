@@ -23,3 +23,10 @@ void find_header(corewar_t *g, char *file)
     magic, g->header->name, g->header->prog_size,g->header->comment);
     fclose(ptr);
 }
+
+void free_header(vm_header_t *header)
+{
+    free(header->name);
+    free(header->comment);
+    free(header);
+}

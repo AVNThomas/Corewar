@@ -46,13 +46,13 @@ int main (int ac, char **argv)
         return (ret_value);
     }
     g = init_struct(g);
-    my_printf("\n");
     while (g->list != NULL) {
-        my_printf("\nTest : %s\n", g->list->name);
         find_header(g, g->list->name);
         get_first_function(g, g->list->name);
+        g->champ = add_champ(g->champ, g->header, g->list);
         g->list = g->list->next;
     }
-
+    print_champ(g->champ);
+    free_all(g);
     return (0);
 }

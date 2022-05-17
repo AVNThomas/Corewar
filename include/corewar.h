@@ -15,6 +15,22 @@ typedef struct func_size_s {
     char arg[4];
 } func_size_t;
 
+typedef struct instruction_s {
+    char rid;
+    int value;
+} instruction_t;
+
+typedef struct champions_s {
+    char *name;
+    char *comment;
+    int number;
+    FILE *ptr;
+    int cycles;
+    int instruction;
+    instruction_t instru[4];
+    struct champions_s *next;
+} champions_t;
+
 typedef struct args_s {
     char *name;
     int number;
@@ -36,6 +52,8 @@ typedef struct corewar_s {
     int load_adress;
     int tmp_nb_player;
     args_t *list;
+    FILE *vm;
+    champions_t *champ;
 }corewar_t;
 
 corewar_t *init_struct(corewar_t *g);
@@ -53,3 +71,9 @@ int arg_handler(corewar_t *g, int ac, char **av);
 int arg_list_handler(corewar_t *g, char **av, int i);
 args_t *add_node(args_t *list, char *name, int nb_player, int address);
 void print_list(args_t *list);
+champions_t *add_champ(champions_t *list, vm_header_t *header, args_t *arg);
+void free_header(vm_header_t *header);
+void print_champ(champions_t *champ);
+void free_champ(champions_t *champ);
+void free_arg(args_t *arg);
+void free_all(corewar_t *g);

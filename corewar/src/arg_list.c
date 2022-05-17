@@ -68,3 +68,14 @@ int arg_list_handler(corewar_t *g, char **av, int i)
     }
     return (i);
 }
+
+void free_arg(args_t *arg)
+{
+    args_t *tmp = arg;
+
+    while (tmp != NULL) {
+        free(tmp->name);
+        tmp = tmp->next;
+    }
+    free(arg);
+}

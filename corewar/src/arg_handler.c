@@ -70,6 +70,5 @@ int arg_handler(corewar_t *g, int ac, char **av)
         if (i == -1)
             return (helper(av[0], 84));
     }
-    print_list(g->list);
     return (1);
 }

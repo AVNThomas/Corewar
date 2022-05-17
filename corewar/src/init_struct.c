@@ -13,5 +13,7 @@ corewar_t *init_struct(corewar_t *g)
     g->header = my_memset(g->header, 0, sizeof(vm_header_t));
     g->header->name = malloc(sizeof(char) * (PROG_NAME_LENGTH + 1));
     g->header->comment = malloc(sizeof(char) * (COMMENT_LENGTH + 1));
+    g->vm = malloc(MEM_SIZE);
+    g->champ = NULL;
     return (g);
 }
