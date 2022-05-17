@@ -14,6 +14,7 @@ char *my_strcpy_malloc(char *dest, char const *src)
 
     if (dest == NULL)
         return (NULL);
+    dest = my_memset(dest, 0, strlen(src) + 1);
     dest = my_strcpy(dest, src);
     return (dest);
 }
