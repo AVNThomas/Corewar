@@ -5,12 +5,11 @@
 ** corewar
 */
 
-#ifndef _COREWAR_H_
-    #define _COREWAR_H_
-    #include "my.h"
-    #include "printf.h"
-    #include "op.h"
-#endif
+#pragma once
+
+#include "my.h"
+#include "printf.h"
+#include "op.h"
 
 typedef struct func_size_s {
     char arg[4];

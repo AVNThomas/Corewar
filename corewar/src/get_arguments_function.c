@@ -59,19 +59,20 @@ int get_arg(func_size_t *func_arg, int function, FILE *ptr)
         return (get_arg_alone(function, ptr));
     for (int i = 0; i < nbr_args; i++) {
         dir_size = 2;
-        if (function == 0 || function == 1 || function == 6 || function == 7 || function == 8)
+        if (function == 0 || function == 1 || function == 6 ||
+        function == 7 || function == 8)
             dir_size = DIR_SIZE;
         if (func_arg->arg[i] == 'r') {
-            arg_size += 1;
-            fread(&arg, 1, 1, ptr);
+            arg_size += T_REG;
+            fread(&arg, 1, T_REG, ptr);
         }
         if (func_arg->arg[i] == 'd') {
             arg_size += dir_size;
             fread(&arg, 1, dir_size, ptr);
         }
         if (func_arg->arg[i] == 'i') {
-            arg_size += 4;
-            fread(&arg, 1, 4, ptr);
+            arg_size += T_IND;
+            fread(&arg, 1, T_IND, ptr);
         }
         printf("func_arg->arg[%d] = %c\narg = %x\n", i, func_arg->arg[i], arg);
         arg = 0;

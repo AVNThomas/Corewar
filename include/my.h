@@ -5,18 +5,17 @@
 ** my
 */
 
-#ifndef MY_H
-    #define MY_H
-    #include <fcntl.h>
-    #include <stdio.h>
-    #include <errno.h>
-    #include <stdlib.h>
-    #include <string.h>
-    #include <unistd.h>
-    #include <sys/types.h>
-    #include <sys/stat.h>
-    #include <sys/wait.h>
-#endif
+#pragma once
+
+#include <fcntl.h>
+#include <stdio.h>
+#include <errno.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/wait.h>
 
 int my_abs(int nb);
 int my_atoi(char const *str);
