@@ -74,9 +74,7 @@ int get_arg(func_size_t *func_arg, int function, FILE *ptr)
             arg_size += IND_SIZE;
             fread(&arg, 1, IND_SIZE, ptr);
         }
-        printf("func_arg->arg[%d] = %c\narg = %x\n", i, func_arg->arg[i], arg);
         arg = 0;
     }
-    printf("arg_size = %d\n", arg_size);
     return (arg_size);
 }

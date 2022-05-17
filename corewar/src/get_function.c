@@ -24,14 +24,11 @@ int get_function(corewar_t *g, FILE *ptr)
     int function = 0;
 
     fread(&mnemonic, 1, 1, ptr);
-    my_printf("mnemonic: %x\n", mnemonic);
     function = find_function(g, mnemonic);
     if (function == -1) {
         my_putstr("Error: unknown mnemonic\n");
         return (-1);
     }
-    my_printf("function = %s\n", op_tab[function].mnemonique);
-    my_printf("nb_argument = %d\n", op_tab[function].nbr_args);
     return (function);
 }
 
@@ -51,7 +48,6 @@ int get_arg_alone(int function, FILE *ptr)
         arg = IND_SIZE;
     fread(&argument, 1, arg, ptr);
     argument = __builtin_bswap32(argument);
-    printf("arg = %d\nargument = %x\n", arg, argument);
     return (arg);
 }
 
@@ -59,7 +55,7 @@ int get_all_function(corewar_t *g, FILE *ptr)
 {
     int function = 0;
     int bitmask = 0;
-    func_size_t *func_size = malloc(sizeof(func_size_t));
+    func_size_t *func_size = NULL;
 
     function = get_function(g, ptr);
     if (function == -1 )
@@ -70,6 +66,7 @@ int get_all_function(corewar_t *g, FILE *ptr)
         bitmask = 0;
     func_size = get_func_arg(bitmask);
     get_arg(func_size, function, ptr);
+    free(func_size);
     return (0);
 }
 

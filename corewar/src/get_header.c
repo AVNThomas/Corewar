@@ -19,8 +19,6 @@ void find_header(corewar_t *g, char *file)
     fread(&g->header->prog_size, 4, 1, ptr);
     g->header->prog_size = __builtin_bswap32(g->header->prog_size);
     fread(g->header->comment, COMMENT_LENGTH, 1, ptr);
-    my_printf("magic = %x\nname = %s\nsize = %x\ncomment = %s\n",g->header->
-    magic, g->header->name, g->header->prog_size,g->header->comment);
     fclose(ptr);
 }
 
