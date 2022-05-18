@@ -23,6 +23,7 @@ static int create_core_file(char const *name)
 static header_t *init_header(void)
 {
     header_t *header = malloc(sizeof(header_t));
+    header = my_memset(header, 0, sizeof(header_t));
 
     if (header == NULL)
         return (NULL);
@@ -51,6 +52,7 @@ static int compile_asm(char *asm_buff, int core_fd)
         return (EXIT_ERR);
     }
     pars_code_list(list);
+    ret_stat = check_list_elem(list);
     write_core(core_fd, header, list);
     free(header);
     free_linked_list(list);

@@ -12,21 +12,21 @@ static int pars_code(asm_list_t *list)
     char **line = my_spliter(list->line, ' ');
     int j = 0;
 
-    list->position = -1;
+    list->pos = -1;
     if (line == NULL)
         return (EXIT_ERR);
-    for (int i = 0; list->position == -1 && line[j] != NULL; i++) {
+    for (int i = 0; list->pos == -1 && line[j] != NULL; i++) {
         if (op_tab[i].nbr_args == 0) {
             i = 0;
             j++;
         }
         if (my_strcmp(op_tab[i].mnemonique, line[j]) == 1) {
             list->asm_line = op_tab[i];
-            list->position = j;
+            list->pos = j;
         }
     }
     free_double_array(line);
-    if (list->position == -1)
+    if (list->pos == -1)
         return (EXIT_ERR);
     return (0);
 }

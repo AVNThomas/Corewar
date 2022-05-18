@@ -19,7 +19,7 @@ typedef struct asm_list_s {
     char *line;
     int size;
     op_t asm_line;
-    int position;
+    int pos;
     struct asm_list_s *next;
 } asm_list_t;
 

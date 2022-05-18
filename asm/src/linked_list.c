@@ -9,7 +9,6 @@
 
 void free_linked_list(asm_list_t *list)
 {
-    my_printf("%p\n", list->next);
     asm_list_t *stock = NULL;
 
     while (list != NULL) {
