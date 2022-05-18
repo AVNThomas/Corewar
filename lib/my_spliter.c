@@ -59,8 +59,6 @@ char **my_spliter(char *str, char const split)
     if (str == NULL)
         return NULL;
     int nb_word = count_word(str, split);
-    if (nb_word == 1)
-        return (NULL);
     char **result = malloc(sizeof(char *) * (nb_word + 1));
     int i = 0;
 
