@@ -29,7 +29,6 @@ champions_t *champ, corewar_t *g)
     int dir_size = DIR_SIZE;
     int nbr_args = op_tab[function].nbr_args;
     int arg = 0;
-    printf("nbr arg = %d\n", nbr_args);
 
     if (function >= 8 && function <= 11)
         dir_size = IND_SIZE;

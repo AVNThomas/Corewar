@@ -7,7 +7,8 @@
 
 #include "../include/corewar.h"
 
-void write_char_in_mem(corewar_t *g, champions_t *champ, unsigned char *value, int size)
+void write_char_in_mem(corewar_t *g, champions_t *champ,
+unsigned char *value, int size)
 {
     for (int i = 0; i <= size; i++) {
         g->vm[champ->head] = value[i];
