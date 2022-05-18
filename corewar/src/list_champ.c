@@ -35,24 +35,25 @@ champions_t *add_value(champions_t *list, vm_header_t *header, args_t *arg)
     return (list);
 }
 
-champions_t *add_champ(champions_t *list, vm_header_t *header, args_t *arg)
+void add_champ(champions_t **list, vm_header_t *header, args_t *arg)
 {
-    champions_t *tmp = list;
-    champions_t *new = malloc(sizeof(champions_t));
+    champions_t *tmp = *list;
+    champions_t *new_node = malloc(sizeof(champions_t));
 
-    if (!list) {
-        list = malloc(sizeof(champions_t));
-        list = init_node(list);
-        list = add_value(list, header, arg);
-        free(new);
-        return (list);
+    if (!(*list)) {
+        *list = malloc(sizeof(champions_t));
+        (*list) = init_node(*list);
+        (*list) = add_value(*list, header, arg);
+        (*list)->next = NULL;
+        free(new_node);
+        return;
     }
     while (tmp->next)
         tmp = tmp->next;
-    new = init_node(new);
-    new = add_value(new, header, arg);
-    tmp->next = new;
-    return (list);
+    new_node = init_node(new_node);
+    new_node = add_value(new_node, header, arg);
+    new_node->next = NULL;
+    tmp->next = new_node;
 }
 
 void print_champ(champions_t *champ)
@@ -67,16 +68,18 @@ void print_champ(champions_t *champ)
     }
 }
 
-void free_champ(champions_t *champ)
+void free_champ(champions_t *arg)
 {
-    champions_t *tmp = champ;
+    champions_t *tmp = NULL;
 
-    while (tmp != NULL) {
-        free(tmp->name);
+    while (arg) {
+        tmp = arg;
+        arg = arg->next;
         free(tmp->comment);
+        free(tmp->name);
         free(tmp->code);
         fclose(tmp->ptr);
-        tmp = tmp->next;
+        free(tmp);
     }
-    free(champ);
+    free (arg);
 }

@@ -44,6 +44,7 @@ int main (int ac, char **argv)
 {
     corewar_t *g = malloc(sizeof(corewar_t));
     int ret_value = 0;
+    args_t *tmp = NULL;
 
     if (!g)
         return (84);
@@ -58,9 +59,10 @@ int main (int ac, char **argv)
     while (g->list != NULL) {
         find_header(g, g->list->name);
         get_first_function(g->list->name);
-        g->champ = add_champ(g->champ, g->header, g->list);
+        add_champ(&g->champ, g->header, g->list);
         g->list = g->list->next;
     }
+    g->list = tmp;
     print_champ(g->champ);
     virtual_machine(g);
     free_all(g);

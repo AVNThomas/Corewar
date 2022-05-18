@@ -7,21 +7,29 @@
 
 #include "../include/corewar.h"
 
-args_t *add_node(args_t *list, char *name, int nb_player, int address)
+void add_node(args_t **list, char *name, int nb_player, int address)
 {
-    args_t *new = malloc(sizeof(args_t));
-    args_t *tmp = list;
+    args_t *tmp = *list;
+    args_t *new_node = malloc(sizeof(args_t));
 
-    new->name = name;
-    new->number = nb_player;
-    new->load_adress = address;
-    new->next = NULL;
-    if (list == NULL)
-        return (new);
-    while (tmp->next != NULL)
+    if (!(*list)) {
+        *list = malloc(sizeof(args_t));
+        (*list)->name = malloc(sizeof(char) * (my_strlen(name) + 1));
+        (*list)->name = my_strcpy((*list)->name, name);
+        (*list)->number = nb_player;
+        (*list)->load_adress = address;
+        (*list)->next = NULL;
+        free(new_node);
+        return;
+    }
+    while (tmp->next)
         tmp = tmp->next;
-    tmp->next = new;
-    return (list);
+    new_node->name = malloc(sizeof(char) * (my_strlen(name) + 1));
+    new_node->name = my_strcpy(new_node->name, name);
+    new_node->number = nb_player;
+    new_node->load_adress = address;
+    new_node->next = NULL;
+    tmp->next = new_node;
 }
 
 void print_list(args_t *list)
@@ -53,6 +61,7 @@ static int arg_n_a(corewar_t *g, char **av, int i)
 
 int arg_list_handler(corewar_t *g, char **av, int i)
 {
+    g->list = NULL;
     i = arg_n_a(g, av, i);
     if (i == -1)
         return (-1);
@@ -60,22 +69,24 @@ int arg_list_handler(corewar_t *g, char **av, int i)
         my_revstr(av[i]);
         g->nb_player++;
         if (g->tmp_nb_player != -1) {
-            g->list = add_node(g->list, av[i], g->tmp_nb_player,
+            add_node(&g->list, av[i], g->tmp_nb_player,
             g->load_adress);
             g->tmp_nb_player = -1;
         } else
-            g->list = add_node(g->list, av[i], g->nb_player, g->load_adress);
+            add_node(&g->list, av[i], g->nb_player, g->load_adress);
     }
     return (i);
 }
 
 void free_arg(args_t *arg)
 {
-    args_t *tmp = arg;
+    args_t *tmp = NULL;
 
-    while (tmp != NULL) {
+    while (arg) {
+        tmp = arg;
+        arg = arg->next;
         free(tmp->name);
-        tmp = tmp->next;
+        free(tmp);
     }
     free(arg);
 }
