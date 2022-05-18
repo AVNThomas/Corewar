@@ -17,11 +17,19 @@ unsigned char *set_null_value(unsigned char *value, int size)
 corewar_t *init_struct(corewar_t *g)
 {
     g->header = malloc(sizeof(vm_header_t));
+    if (g->header == NULL)
+        return (NULL);
     g->header = my_memset(g->header, 0, sizeof(vm_header_t));
     g->header->name = malloc(sizeof(char) * (PROG_NAME_LENGTH + 1));
+    if (g->header->name == NULL)
+        return (NULL);
     g->header->comment = malloc(sizeof(char) * (COMMENT_LENGTH + 1));
+    if (g->header->comment == NULL)
+        return (NULL);
     g->champ = NULL;
     g->vm = malloc(sizeof(char) * MEM_SIZE);
+    if (g->vm == NULL)
+        return (NULL);
     g->vm = set_null_value(g->vm, MEM_SIZE);
     return (g);
 }

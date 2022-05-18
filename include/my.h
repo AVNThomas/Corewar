@@ -55,3 +55,4 @@ void my_putnbr_float(float value);
 char *my_revstr(char *str);
 unsigned char *my_strucpy(unsigned char *dest, unsigned char const *src,
 int size);
+int my_strstr(char *sub_string, char *full_string);

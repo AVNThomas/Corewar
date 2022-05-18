@@ -10,7 +10,9 @@
 champions_t *init_node(champions_t *champ)
 {
     champ->comment = malloc(sizeof(char) * (COMMENT_LENGTH + 1));
+    champ->comment == NULL ? exit(84) : 0;
     champ->name = malloc(sizeof(char) * (PROG_NAME_LENGTH + 1));
+    champ->name == NULL ? exit(84) : 0;
     champ->number = 0;
     champ->prog_size = 0;
     champ->ptr = NULL;
@@ -31,6 +33,7 @@ champions_t *add_value(champions_t *list, vm_header_t *header, args_t *arg)
     list->comment = my_strcpy(list->comment, header->comment);
     list->prog_size = header->prog_size;
     list->code = malloc(sizeof(char) * (list->prog_size + 2));
+    list->code == NULL ? exit(84) : 0;
     list->code = my_strucpy(list->code, header->code, header->prog_size);
     return (list);
 }
@@ -40,8 +43,10 @@ void add_champ(champions_t **list, vm_header_t *header, args_t *arg)
     champions_t *tmp = *list;
     champions_t *new_node = malloc(sizeof(champions_t));
 
+    new_node == NULL ? exit(84) : 0;
     if (!(*list)) {
         *list = malloc(sizeof(champions_t));
+        *list == NULL ? exit(84) : 0;
         (*list) = init_node(*list);
         (*list) = add_value(*list, header, arg);
         (*list)->next = NULL;

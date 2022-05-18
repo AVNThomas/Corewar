@@ -23,15 +23,6 @@ int helper(char *prog, int ret_val)
     return (ret_val);
 }
 
-int check_arg (int ac, char **argv)
-{
-    if (ac == 1)
-        return (helper(argv[0], 84));
-    if (my_strncmp(argv[1], "-h", my_strlen("-h")) == 0)
-        helper(argv[0], 0);
-    return (0);
-}
-
 void virtual_machine(corewar_t *g)
 {
     place_champion(g);
@@ -40,11 +31,25 @@ void virtual_machine(corewar_t *g)
     }
 }
 
+void fill_champ(corewar_t *g)
+{
+    args_t *tmp = NULL;
+
+    print_list(g->list);
+    while (g->list != NULL) {
+        find_header(g, g->list->name);
+        get_first_function(g->list->name);
+        add_champ(&g->champ, g->header, g->list);
+        g->list = g->list->next;
+    }
+    g->list = tmp;
+    print_champ(g->champ);
+}
+
 int main (int ac, char **argv)
 {
     corewar_t *g = malloc(sizeof(corewar_t));
     int ret_value = 0;
-    args_t *tmp = NULL;
 
     if (!g)
         return (84);
@@ -55,15 +60,11 @@ int main (int ac, char **argv)
         return (ret_value);
     }
     g = init_struct(g);
-    print_list(g->list);
-    while (g->list != NULL) {
-        find_header(g, g->list->name);
-        get_first_function(g->list->name);
-        add_champ(&g->champ, g->header, g->list);
-        g->list = g->list->next;
+    if (g == NULL) {
+        my_free("sstt", g->header->name, g->header->comment, g->header, g);
+        return (84);
     }
-    g->list = tmp;
-    print_champ(g->champ);
+    fill_champ(g);
     virtual_machine(g);
     free_all(g);
     return (0);
