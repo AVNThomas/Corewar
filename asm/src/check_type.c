@@ -52,7 +52,7 @@ static int check_type_elem(asm_list_t *list, char **tab, int i)
 
 static int check_elem(asm_list_t *list)
 {
-    char **tab = my_spliter2(list->line, ' ');
+    char **tab = my_spliter(list->line, ' ');
     int error = 0;
     int size = 0;
 

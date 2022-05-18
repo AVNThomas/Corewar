@@ -18,7 +18,7 @@ static void compare_mnemonique(char **line, int i, int j, asm_list_t *list)
 
 static int pars_code(asm_list_t *list)
 {
-    char **line = my_spliter2(list->line, ' ');
+    char **line = my_spliter(list->line, ' ');
     int j = 0;
 
     list->pos = -1;
