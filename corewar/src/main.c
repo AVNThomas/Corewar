@@ -32,6 +32,11 @@ int check_arg (int ac, char **argv)
     return (0);
 }
 
+void virtual_machine(corewar_t *g)
+{
+    place_champion(g);
+}
+
 int main (int ac, char **argv)
 {
     corewar_t *g = malloc(sizeof(corewar_t));
@@ -52,7 +57,7 @@ int main (int ac, char **argv)
         g->champ = add_champ(g->champ, g->header, g->list);
         g->list = g->list->next;
     }
-    print_champ(g->champ);
+    virtual_machine(g);
     free_all(g);
     return (0);
 }

@@ -23,14 +23,17 @@ typedef struct instruction_s {
 typedef struct champions_s {
     char *name;
     char *comment;
+    unsigned char *code;
+    int prog_size;
     int number;
+    int load_adress;
+    int head;
+    int tail;
     FILE *ptr;
     int cycles;
     int instruction;
     instruction_t instru[4];
     int registre[REG_NUMBER];
-    char *comment;
-    int number;
     struct champions_s *next;
 } champions_t;
 
@@ -46,16 +49,17 @@ typedef struct vm_header_s {
     char *name;
     int prog_size;
     char *comment;
+    unsigned char *code;
 }vm_header_t;
 
 typedef struct corewar_s {
     vm_header_t *header;
     int nb_cycle;
     int nb_player;
-    int load_adress;
     int tmp_nb_player;
+    int load_adress;
     args_t *list;
-    FILE *vm;
+    unsigned char *vm;
     champions_t *champ;
 }corewar_t;
 
@@ -80,3 +84,5 @@ void print_champ(champions_t *champ);
 void free_champ(champions_t *champ);
 void free_arg(args_t *arg);
 void free_all(corewar_t *g);
+void place_champion(corewar_t *g);
+void write_char_in_mem(corewar_t *g, champions_t *champ, unsigned char *value, int size);
