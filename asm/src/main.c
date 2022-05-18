@@ -6,8 +6,6 @@
 */
 
 #include "../include/asm.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 static int helper(char *prog, int ret_val)
 {
