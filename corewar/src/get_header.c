@@ -19,6 +19,8 @@ void find_header(corewar_t *g, char *file)
     fread(&g->header->prog_size, 4, 1, ptr);
     g->header->prog_size = __builtin_bswap32(g->header->prog_size);
     fread(g->header->comment, COMMENT_LENGTH, 1, ptr);
+    if (g->header->code != NULL)
+        free(g->header->code);
     g->header->code = malloc(sizeof(char) * (g->header->prog_size +2));
     fseek(ptr, 4, SEEK_CUR);
     fread(g->header->code, g->header->prog_size, 1, ptr);

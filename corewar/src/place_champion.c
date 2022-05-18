@@ -7,6 +7,16 @@
 
 #include "../include/corewar.h"
 
+void revert_endianess(corewar_t *g, champions_t *champ)
+{
+    char tmp = 0;
+    for (int i = champ->head; i <= champ->prog_size; i += 2) {
+        tmp = g->vm[i];
+        g->vm[i] = g->vm[i + 1];
+        g->vm[i + 1] = tmp;
+    }
+}
+
 void place_champion(corewar_t *g)
 {
     int load_adress[g->nb_player];
@@ -20,6 +30,7 @@ void place_champion(corewar_t *g)
         tmp->head = load_adress[i];
         tmp->tail = load_adress[i];
         write_char_in_mem(g, tmp, tmp->code, tmp->prog_size);
+        tmp->head = tmp->tail;
         tmp = tmp->next;
     }
 }

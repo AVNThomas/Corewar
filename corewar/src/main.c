@@ -35,6 +35,9 @@ int check_arg (int ac, char **argv)
 void virtual_machine(corewar_t *g)
 {
     place_champion(g);
+    while (1) {
+        execute_champion(g);
+    }
 }
 
 int main (int ac, char **argv)
@@ -51,12 +54,14 @@ int main (int ac, char **argv)
         return (ret_value);
     }
     g = init_struct(g);
+    print_list(g->list);
     while (g->list != NULL) {
         find_header(g, g->list->name);
         get_first_function(g->list->name);
         g->champ = add_champ(g->champ, g->header, g->list);
         g->list = g->list->next;
     }
+    print_champ(g->champ);
     virtual_machine(g);
     free_all(g);
     return (0);

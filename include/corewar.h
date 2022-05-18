@@ -85,4 +85,12 @@ void free_champ(champions_t *champ);
 void free_arg(args_t *arg);
 void free_all(corewar_t *g);
 void place_champion(corewar_t *g);
-void write_char_in_mem(corewar_t *g, champions_t *champ, unsigned char *value, int size);
+void write_char_in_mem(corewar_t *g, champions_t *champ, unsigned char *value,
+int size);
+int find_function(int mnemonic);
+unsigned char read_char_in_mem(corewar_t *g, champions_t *champ);
+void execute_champion(corewar_t *g);
+int get_argument(func_size_t *func_arg, int function,
+champions_t *champ, corewar_t *g);
+int read_ind_in_mem(corewar_t *g, champions_t *champ);
+int read_dir_in_mem(corewar_t *g, champions_t *champ);

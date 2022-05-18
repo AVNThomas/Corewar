@@ -16,3 +16,34 @@ void write_char_in_mem(corewar_t *g, champions_t *champ, unsigned char *value, i
             champ->head = 0;
     }
 }
+
+unsigned char read_char_in_mem(corewar_t *g, champions_t *champ)
+{
+    unsigned char value;
+
+    value = g->vm[champ->head];
+    champ->head++;
+    return (value);
+}
+
+int read_dir_in_mem(corewar_t *g, champions_t *champ)
+{
+    int value = 0;
+
+    for (int i = 0; i < 4; i++) {
+        value = value << 8;
+        value += read_char_in_mem(g, champ);
+    }
+    return (value);
+}
+
+int read_ind_in_mem(corewar_t *g, champions_t *champ)
+{
+    int value = 0;
+
+    for (int i = 0; i < 2; i++) {
+        value = value << 8;
+        value += read_char_in_mem(g, champ);
+    }
+    return (value);
+}

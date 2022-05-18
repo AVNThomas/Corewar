@@ -74,6 +74,7 @@ void free_champ(champions_t *champ)
     while (tmp != NULL) {
         free(tmp->name);
         free(tmp->comment);
+        free(tmp->code);
         fclose(tmp->ptr);
         tmp = tmp->next;
     }
