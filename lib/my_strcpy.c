@@ -16,3 +16,14 @@ char *my_strcpy(char *dest, char const *src)
     dest[i] = '\0';
     return dest;
 }
+
+unsigned char *my_strucpy(unsigned char *dest, unsigned char const *src,
+int size)
+{
+    int i = 0;
+
+    for (; i <= size; i++)
+        dest[i] = src[i];
+    dest[i] = '\0';
+    return dest;
+}

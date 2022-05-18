@@ -72,7 +72,6 @@ int get_arg(func_size_t *func_arg, int function, FILE *ptr)
         }
         if (func_arg->arg[i] == 'i') {
             arg_size += IND_SIZE;
-            fread(&arg, 1, IND_SIZE, ptr);
         }
         arg = 0;
     }

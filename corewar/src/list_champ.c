@@ -12,6 +12,7 @@ champions_t *init_node(champions_t *champ)
     champ->comment = malloc(sizeof(char) * (COMMENT_LENGTH + 1));
     champ->name = malloc(sizeof(char) * (PROG_NAME_LENGTH + 1));
     champ->number = 0;
+    champ->prog_size = 0;
     champ->ptr = NULL;
     champ->cycles = 0;
     champ->instruction = 0;
@@ -28,6 +29,9 @@ champions_t *add_value(champions_t *list, vm_header_t *header, args_t *arg)
     list->next = NULL;
     list->name = my_strcpy(list->name, header->name);
     list->comment = my_strcpy(list->comment, header->comment);
+    list->prog_size = header->prog_size;
+    list->code = malloc(sizeof(char) * (list->prog_size + 2));
+    list->code = my_strucpy(list->code, header->code, header->prog_size);
     return (list);
 }
 
@@ -70,6 +74,7 @@ void free_champ(champions_t *champ)
     while (tmp != NULL) {
         free(tmp->name);
         free(tmp->comment);
+        free(tmp->code);
         fclose(tmp->ptr);
         tmp = tmp->next;
     }

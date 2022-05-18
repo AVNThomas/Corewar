@@ -32,6 +32,14 @@ int check_arg (int ac, char **argv)
     return (0);
 }
 
+void virtual_machine(corewar_t *g)
+{
+    place_champion(g);
+    while (1) {
+        execute_champion(g);
+    }
+}
+
 int main (int ac, char **argv)
 {
     corewar_t *g = malloc(sizeof(corewar_t));
@@ -46,6 +54,7 @@ int main (int ac, char **argv)
         return (ret_value);
     }
     g = init_struct(g);
+    print_list(g->list);
     while (g->list != NULL) {
         find_header(g, g->list->name);
         get_first_function(g->list->name);
@@ -53,6 +62,7 @@ int main (int ac, char **argv)
         g->list = g->list->next;
     }
     print_champ(g->champ);
+    virtual_machine(g);
     free_all(g);
     return (0);
 }
