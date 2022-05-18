@@ -25,6 +25,7 @@ fclean: clean
 	@make fclean -C lib/
 	@make fclean -C asm/
 	@make fclean -C corewar/
+	rm -rf vgcore*
 
 re: fclean all
 
