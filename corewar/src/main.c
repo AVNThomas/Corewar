@@ -26,6 +26,9 @@ int helper(char *prog, int ret_val)
 void virtual_machine(corewar_t *g)
 {
     place_champion(g);
+    for (champions_t *tmp = g->champ; tmp != NULL; tmp = tmp->next) {
+            advance_to_next_func(tmp, g);
+    }
     while (1) {
         execute_champion(g);
     }

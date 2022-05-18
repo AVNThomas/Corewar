@@ -65,7 +65,6 @@ typedef struct corewar_s {
 
 typedef struct FUNC_PTN
 {
-    int func_id;
     void(*ptr_fct)(corewar_t *, champions_t *);
 } func_ptn_t;
 
@@ -117,3 +116,5 @@ void execute_lldi(corewar_t *g, champions_t *champ);
 void execute_lfork(corewar_t *g, champions_t *champ);
 void execute_aff(corewar_t *g, champions_t *champ);
 args_t *add_argument(args_t *list, char *name, int address, int nb_player);
+void execute_function(champions_t *champ, corewar_t *g);
+void advance_to_next_func(champions_t *champ, corewar_t *g);

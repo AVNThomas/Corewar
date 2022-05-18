@@ -9,7 +9,8 @@ NAME	=	corewar
 
 CC	=	gcc
 
-SRCS	=	$(wildcard src/*.c)		\
+SRCS	=	$(wildcard src/*.c)						\
+			$(wildcard src/execute_function/*.c)	\
 
 SRCS_TEST	=	tests/tests_vm.c\
 
