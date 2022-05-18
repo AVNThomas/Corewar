@@ -7,17 +7,59 @@
 
 #include "../include/asm.h"
 
+static int special_size(asm_list_t *list)
+{
+    int i = 0;
+
+    if (list->asm_line.code == 10)
+        return (6);
+    if (list->asm_line.code == 9 || list->asm_line.code == 12)
+        return (3);
+    if (list->asm_line.code == 1)
+        return (5);
+    for (int j = 0; j != list->asm_line.nbr_args; j++) {
+        if (check_type(tab[list->pos + j + 1]) == 1)
+            i++;
+        else
+            i += 2;
+    }
+    return (i);
+}
+
+static int get_size_line(asm_list_t *list)
+{
+    int i = 0;
+    char **tab = my_spliter2(list->line, ' ');
+
+    if (!(list->asm_line.nbr_args == 1 && list->asm_line.type[0] != 1))
+        i++;
+    if ((list->asm_line.code >= 9 && list->asm_line.code >= 12) ||
+    list->asm_line.code == 1)
+        i += special_size(list);
+    else {
+        i++;
+        for (int j = 0; j != list->asm_line.nbr_args; j++)
+            i += check_type(tab[list->pos + j + 1]);
+    }
+    free_double_array(tab);
+    return (i);
+}
+
 static void get_size_prog(asm_list_t *list, int *size)
 {
+    asm_list_t *backup = list;
+
+    for (; list != NULL; list = list->next) {
+        if (list->good == 1)
+            *size += get_size_line(list);
+    }
+    list = backup;
     *size = __builtin_bswap32(*size);
 }
 
 static int write_header(int core, header_t *header, asm_list_t *list)
 {
     get_size_prog(list, &header->prog_size);
-    printf("%s\n", header->prog_name);
-    printf("%s\n", header->comment);
-    printf("%x\n", header->magic);
     write(core, header, sizeof(header_t));
     return (EXIT_OK);
 }

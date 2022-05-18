@@ -12,6 +12,7 @@ static void compare_mnemonique(char **line, int i, int j, asm_list_t *list)
     if (my_strcmp(op_tab[i].mnemonique, line[j]) == 1) {
         list->asm_line = op_tab[i];
         list->pos = j;
+        list->good = 1;
     }
 }
 
@@ -33,20 +34,16 @@ static int pars_code(asm_list_t *list)
     }
     free_double_array(line);
     if (list->pos == -1)
-        return (EXIT_ERR);
+        list->good = 0;
     return (0);
 }
 
 int pars_code_list(asm_list_t *list)
 {
     asm_list_t *backup = list;
-    int check_error = 0;
 
-    for (; list != NULL; list = list->next) {
-        check_error = pars_code(list);
-        if (check_error == EXIT_ERR)
-            return (EXIT_ERR);
-    }
+    for (; list != NULL; list = list->next)
+        pars_code(list);
     list = backup;
     return (0);
 }

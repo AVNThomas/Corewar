@@ -20,6 +20,7 @@ typedef struct asm_list_s {
     int size;
     op_t asm_line;
     int pos;
+    int good;
     struct asm_list_s *next;
 } asm_list_t;
 
@@ -38,5 +39,6 @@ int search_list_char(asm_list_t *list, char *word);
 void free_linked_list(asm_list_t *list);
 int pars_code_list(asm_list_t *list);
 int check_list_elem(asm_list_t *list);
+int check_type(char *word);
 
 #endif
