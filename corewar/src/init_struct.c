@@ -25,3 +25,15 @@ corewar_t *init_struct(corewar_t *g)
     g->vm = set_null_value(g->vm, MEM_SIZE);
     return (g);
 }
+
+void fill_list(corewar_t *g)
+{
+    args_t *tmp = g->list;
+
+    while (tmp != NULL) {
+        find_header(g, tmp->name);
+        get_first_function(tmp->name);
+        add_champ(&g->champ, g->header, tmp);
+        tmp = tmp->next;
+    }
+}
