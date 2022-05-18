@@ -6,55 +6,22 @@
 */
 
 #include "../include/asm.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/stat.h>
-#include <unistd.h>
 
 static int create_core_file(char const *name)
 {
     int fd = 0;
 
     fd = open(name , O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR |
-                S_IRGRP | S_IROTH);
+    S_IRGRP | S_IROTH);
     return (fd);
 }
 
-static header_t *init_header(void)
+static char *clean_buff(char *buff)
 {
-    header_t *header = malloc(sizeof(header_t));
-    header = my_memset(header, 0, sizeof(header_t));
-
-    if (header == NULL)
-        return (NULL);
-    header->magic = 0;
-    header->prog_size = 0;
-    return (header);
-}
-
-static int compile_asm(char *asm_buff, int core_fd)
-{
-    core_fd = core_fd;
-    int ret_stat = EXIT_OK;
-    header_t *header = init_header();
-    asm_list_t *list = NULL;
-
-    if (header == NULL)
-        return (EXIT_ERR);
-    header = generate_header(header, asm_buff);
-    if (header == NULL)
-        return (EXIT_ERR);
-    list = compile_core(list, asm_buff);
-    if (list == NULL) {
-        free(header);
-        return (EXIT_ERR);
-    }
-    pars_code_list(list);
-    ret_stat = check_list_elem(list);
-    write_core(core_fd, header, list);
-    free(header);
-    free_linked_list(list);
-    return (ret_stat);
+    for (int i = 0; buff[i] != '\0'; i++)
+        if (buff[i] == ',' || buff[i] == '\t')
+            buff[i] = ' ';
+    return (buff);
 }
 
 int generate_core(FILE *asm_fd, char const *name)
@@ -65,7 +32,7 @@ int generate_core(FILE *asm_fd, char const *name)
 
     if (core_fd == -1)
         return (EXIT_ERR);
-    asm_buff = getline_file(asm_fd);
+    asm_buff = clean_buff(getline_file(asm_fd));
     if (asm_buff == NULL) {
         close(core_fd);
         return (EXIT_ERR);
