@@ -76,7 +76,6 @@ int arg_a(corewar_t *g, char **av, int i);
 int hexa_to_decimal2(int hexa);
 int arg_handler(corewar_t *g, int ac, char **av);
 int arg_list_handler(corewar_t *g, char **av, int i);
-// args_t *add_node(args_t *list, char *name, int nb_player, int address);
 void print_list(args_t *list);
 void add_node(args_t **list, char *name, int nb_player, int address);
 void add_champ(champions_t **list, vm_header_t *header, args_t *arg);
@@ -95,3 +94,4 @@ int get_argument(func_size_t *func_arg, int function,
 champions_t *champ, corewar_t *g);
 int read_ind_in_mem(corewar_t *g, champions_t *champ);
 int read_dir_in_mem(corewar_t *g, champions_t *champ);
+args_t *add_argument(args_t *list, char *name, int address, int nb_player);

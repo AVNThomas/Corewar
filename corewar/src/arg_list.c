@@ -16,22 +16,13 @@ void add_node(args_t **list, char *name, int nb_player, int address)
     if (!(*list)) {
         *list = malloc(sizeof(args_t));
         *list == NULL ? exit(84) : 0;
-        (*list)->name = malloc(sizeof(char) * (my_strlen(name) + 1));
-        (*list)->name = my_strcpy((*list)->name, name);
-        (*list)->number = nb_player;
-        (*list)->load_adress = address;
-        (*list)->next = NULL;
+        *list = add_argument(*list, name, address, nb_player);
         free(new_node);
         return;
     }
     while (tmp->next)
         tmp = tmp->next;
-    new_node->name = malloc(sizeof(char) * (my_strlen(name) + 1));
-    new_node->name == NULL ? exit(84) : 0;
-    new_node->name = my_strcpy(new_node->name, name);
-    new_node->number = nb_player;
-    new_node->load_adress = address;
-    new_node->next = NULL;
+    new_node = add_argument(new_node, name, address, nb_player);
     tmp->next = new_node;
 }
 
