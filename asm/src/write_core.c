@@ -29,38 +29,39 @@ static int special_size(asm_list_t *list, char **tab)
 
 static int get_size_line(asm_list_t *list)
 {
-    int i = 0;
-    char **tab = my_spliter2(list->line, ' ');
+    char **tab = my_spliter(list->line, ' ');
 
     if (!(list->asm_line.nbr_args == 1 && list->asm_line.type[0] != 1))
-        i++;
+        list->size++;
     if ((list->asm_line.code >= 9 && list->asm_line.code <= 12) ||
     list->asm_line.code == 1)
-        i += special_size(list, tab);
+        list->size += special_size(list, tab);
     else {
-        i++;
+        list->size++;
         for (int j = 0; j != list->asm_line.nbr_args; j++)
-            i += check_type(tab[list->pos + j + 1]);
+            list->size += check_type(tab[list->pos + j + 1]);
     }
     free_double_array(tab);
-    return (i);
+    return (list->size);
 }
 
-static void get_size_prog(asm_list_t *list, int *size)
+static int get_size_prog(asm_list_t *list)
 {
+    int size = 0;
     asm_list_t *backup = list;
 
     for (; list != NULL; list = list->next) {
         if (list->good == 1)
-            *size += get_size_line(list);
+            size += get_size_line(list);
     }
     list = backup;
-    *size = __builtin_bswap32(*size);
+    size = __builtin_bswap32(size);
+    return (size);
 }
 
 static int write_header(int core, header_t *header, asm_list_t *list)
 {
-    get_size_prog(list, &header->prog_size);
+    header->prog_size = get_size_prog(list);
     write(core, header, sizeof(header_t));
     return (EXIT_OK);
 }
@@ -69,6 +70,9 @@ int write_core(int core, header_t *header, asm_list_t *list)
 {
     if (write_header(core, header, list) == EXIT_ERR)
         return (EXIT_ERR);
-    for (; list != NULL; list = list->next);
-    return (0);
+    if (write_prog(core, list) == EXIT_ERR)
+        return (EXIT_ERR);
+    free(header);
+    free_linked_list(list);
+    return (EXIT_OK);
 }
