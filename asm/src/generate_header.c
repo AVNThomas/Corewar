@@ -19,7 +19,7 @@ int magic_header(int *header)
 
 int name_header(char **asm_buff, char *header)
 {
-    char *tmp = find_line(header, asm_buff, NAME_CMD_STRING);
+    char *tmp = find_line(asm_buff, NAME_CMD_STRING);
     int last_quote = 0;
     if (tmp == NULL)
         return (EXIT_ERR);
@@ -32,7 +32,7 @@ int name_header(char **asm_buff, char *header)
 
 int comment_header(char **asm_buff, char *header)
 {
-    char *tmp = find_line(header, asm_buff, COMMENT_CMD_STRING);
+    char *tmp = find_line(asm_buff, COMMENT_CMD_STRING);
     int last_quote = 0;
     if (tmp == NULL)
         return (EXIT_ERR);

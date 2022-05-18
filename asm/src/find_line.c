@@ -35,7 +35,7 @@ static char *remove_useless_char(char *tab)
     return (tmp);
 }
 
-char *find_line(char *header, char **tab, char *search)
+char *find_line(char **tab, char *search)
 {
     int size = my_strlen(search);
     char *tmp = NULL;
@@ -44,8 +44,7 @@ char *find_line(char *header, char **tab, char *search)
         tmp = remove_useless_char(tab[i]);
         if (my_strncmp(search, tmp, size) == 0 && check_valid(tmp,
             LABEL_CHARS)) {
-            header = my_strcpy(header, tmp);
-            return (header);
+            return (tmp);
         }
     }
     return (NULL);
