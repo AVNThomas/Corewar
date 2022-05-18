@@ -63,6 +63,12 @@ typedef struct corewar_s {
     champions_t *champ;
 }corewar_t;
 
+typedef struct FUNC_PTN
+{
+    int func_id;
+    void(*ptr_fct)(corewar_t *, champions_t *);
+} func_ptn_t;
+
 corewar_t *init_struct(corewar_t *g);
 int hexa_to_decimal(char *hexa);
 void find_header(corewar_t *g, char *file);
@@ -94,4 +100,20 @@ int get_argument(func_size_t *func_arg, int function,
 champions_t *champ, corewar_t *g);
 int read_ind_in_mem(corewar_t *g, champions_t *champ);
 int read_dir_in_mem(corewar_t *g, champions_t *champ);
+void execute_live(corewar_t *g, champions_t *champ);
+void execute_ld(corewar_t *g, champions_t *champ);
+void execute_st(corewar_t *g, champions_t *champ);
+void execute_add(corewar_t *g, champions_t *champ);
+void execute_sub(corewar_t *g, champions_t *champ);
+void execute_and(corewar_t *g, champions_t *champ);
+void execute_or(corewar_t *g, champions_t *champ);
+void execute_xor(corewar_t *g, champions_t *champ);
+void execute_zjmp(corewar_t *g, champions_t *champ);
+void execute_ldi(corewar_t *g, champions_t *champ);
+void execute_sti(corewar_t *g, champions_t *champ);
+void execute_fork(corewar_t *g, champions_t *champ);
+void execute_lld(corewar_t *g, champions_t *champ);
+void execute_lldi(corewar_t *g, champions_t *champ);
+void execute_lfork(corewar_t *g, champions_t *champ);
+void execute_aff(corewar_t *g, champions_t *champ);
 args_t *add_argument(args_t *list, char *name, int address, int nb_player);
