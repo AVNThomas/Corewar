@@ -7,7 +7,7 @@
 
 #include "../include/asm.h"
 
-static int special_size(asm_list_t *list)
+static int special_size(asm_list_t *list, char **tab)
 {
     int i = 0;
 
@@ -17,6 +17,7 @@ static int special_size(asm_list_t *list)
         return (3);
     if (list->asm_line.code == 1)
         return (5);
+    i++;
     for (int j = 0; j != list->asm_line.nbr_args; j++) {
         if (check_type(tab[list->pos + j + 1]) == 1)
             i++;
@@ -33,9 +34,9 @@ static int get_size_line(asm_list_t *list)
 
     if (!(list->asm_line.nbr_args == 1 && list->asm_line.type[0] != 1))
         i++;
-    if ((list->asm_line.code >= 9 && list->asm_line.code >= 12) ||
+    if ((list->asm_line.code >= 9 && list->asm_line.code <= 12) ||
     list->asm_line.code == 1)
-        i += special_size(list);
+        i += special_size(list, tab);
     else {
         i++;
         for (int j = 0; j != list->asm_line.nbr_args; j++)
