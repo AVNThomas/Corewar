@@ -27,8 +27,6 @@ static header_t *init_header(void)
 
     if (header == NULL)
         return (NULL);
-    my_memset(header->comment, 0, COMMENT_LENGTH + 1);
-    my_memset(header->prog_name, 0, PROG_NAME_LENGTH + 1);
     header->magic = 0;
     header->prog_size = 0;
     return (header);
