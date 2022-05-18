@@ -6,7 +6,6 @@
 */
 
 #include "../include/asm.h"
-#include <stdlib.h>
 
 static asm_list_t *check_asm_line(char *line, asm_list_t *list)
 {
@@ -23,6 +22,42 @@ static asm_list_t *check_asm_line(char *line, asm_list_t *list)
         return (NULL);
     }
     return (list);
+}
+
+static header_t *init_header(void)
+{
+    header_t *header = malloc(sizeof(header_t));
+    header = my_memset(header, 0, sizeof(header_t));
+
+    if (header == NULL)
+        return (NULL);
+    header->magic = 0;
+    header->prog_size = 0;
+
+    return (header);
+}
+
+int compile_asm(char *asm_buff, int core_fd)
+{
+    core_fd = core_fd;
+    int ret_stat = EXIT_OK;
+    header_t *header = init_header();
+    asm_list_t *list = NULL;
+
+    if (header == NULL)
+        return (EXIT_ERR);
+    header = generate_header(header, asm_buff);
+    if (header == NULL)
+        return (EXIT_ERR);
+    list = compile_core(list, asm_buff);
+    if (list == NULL) {
+        free(header);
+        return (EXIT_ERR);
+    }
+    pars_code_list(list);
+    ret_stat = check_list_elem(list);
+    write_core(core_fd, header, list);
+    return (ret_stat);
 }
 
 asm_list_t *compile_core(asm_list_t *list, char *asm_buff)
