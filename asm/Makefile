@@ -15,6 +15,7 @@ SRCS	=	src/compile_prog.c\
 		src/generate_header.c\
 		src/main.c\
 		src/write_core.c\
+		src/write_prog.c\
 		src/linked_list.c\
 		src/pars_linked_list.c\
 		src/op.c\
