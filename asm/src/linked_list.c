@@ -62,6 +62,7 @@ asm_list_t *add_nod_list(asm_list_t *list, char *line)
     backup = list;
     nod->line = NULL;
     nod->line = my_strcpy_malloc(nod->line, line);
+    nod->size = 0;
     nod->next = NULL;
     if (list == NULL)
         return (nod);
