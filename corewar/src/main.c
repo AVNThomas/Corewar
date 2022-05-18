@@ -23,15 +23,6 @@ int helper(char *prog, int ret_val)
     return (ret_val);
 }
 
-int check_arg (int ac, char **argv)
-{
-    if (ac == 1)
-        return (helper(argv[0], 84));
-    if (my_strncmp(argv[1], "-h", my_strlen("-h")) == 0)
-        helper(argv[0], 0);
-    return (0);
-}
-
 void virtual_machine(corewar_t *g)
 {
     place_champion(g);
@@ -55,6 +46,10 @@ int main (int ac, char **argv)
         return (ret_value);
     }
     g = init_struct(g);
+    if (g == NULL) {
+        my_free("sstt", g->header->name, g->header->comment, g->header, g);
+        return (84);
+    }
     print_list(g->list);
     while (g->list != NULL) {
         find_header(g, g->list->name);

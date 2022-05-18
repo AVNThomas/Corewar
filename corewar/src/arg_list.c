@@ -12,8 +12,10 @@ void add_node(args_t **list, char *name, int nb_player, int address)
     args_t *tmp = *list;
     args_t *new_node = malloc(sizeof(args_t));
 
+    new_node == NULL ? exit(84) : 0;
     if (!(*list)) {
         *list = malloc(sizeof(args_t));
+        *list == NULL ? exit(84) : 0;
         (*list)->name = malloc(sizeof(char) * (my_strlen(name) + 1));
         (*list)->name = my_strcpy((*list)->name, name);
         (*list)->number = nb_player;
@@ -25,6 +27,7 @@ void add_node(args_t **list, char *name, int nb_player, int address)
     while (tmp->next)
         tmp = tmp->next;
     new_node->name = malloc(sizeof(char) * (my_strlen(name) + 1));
+    new_node->name == NULL ? exit(84) : 0;
     new_node->name = my_strcpy(new_node->name, name);
     new_node->number = nb_player;
     new_node->load_adress = address;
@@ -65,8 +68,7 @@ int arg_list_handler(corewar_t *g, char **av, int i)
     i = arg_n_a(g, av, i);
     if (i == -1)
         return (-1);
-    if (my_strncmp(my_revstr(av[i]), "roc.", 4)) {
-        my_revstr(av[i]);
+    if (my_strstr(".cor", av[i])) {
         g->nb_player++;
         if (g->tmp_nb_player != -1) {
             add_node(&g->list, av[i], g->tmp_nb_player,

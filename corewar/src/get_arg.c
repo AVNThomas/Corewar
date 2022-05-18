@@ -9,8 +9,6 @@
 
 int get_argument_alone(int function, champions_t *champ, corewar_t *g)
 {
-    int argument = 0;
-    int arg = 0;
     int dir_size = DIR_SIZE;
     if (function >= 8 && function <= 11)
         dir_size = IND_SIZE;

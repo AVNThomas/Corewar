@@ -37,6 +37,7 @@ func_size_t *get_func_arg(int bitmask)
     int tmp = bitmask;
     func_size_t *func_size = malloc(sizeof(func_size_t));
 
+    func_size == NULL ? exit(84) : 0;
     if (bitmask < 128) {
         tmp = bitmask + 128;
         func_size->arg[0] = 'r';

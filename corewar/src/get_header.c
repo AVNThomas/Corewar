@@ -22,6 +22,7 @@ void find_header(corewar_t *g, char *file)
     if (g->header->code != NULL)
         free(g->header->code);
     g->header->code = malloc(sizeof(char) * (g->header->prog_size +2));
+    g->header->code == NULL ? exit(84) : 0;
     fseek(ptr, 4, SEEK_CUR);
     fread(g->header->code, g->header->prog_size, 1, ptr);
     g->header->code[g->header->prog_size + 1] = '\0';
