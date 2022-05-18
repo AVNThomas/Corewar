@@ -35,8 +35,6 @@ static int check_type_elem(asm_list_t *list, char **tab, int i)
 {
     int error = 0;
 
-    printf("coucou type elem\n");
-    printf("%d \n", list->asm_line.type[i]);
     if (list->asm_line.type[i] == 4 && check_type(tab[i + list->pos + 1]) != 3)
         error++;
     if (list->asm_line.type[i] == 2 && check_type(tab[i + list->pos + 1]) != 2)
@@ -54,11 +52,10 @@ static int check_type_elem(asm_list_t *list, char **tab, int i)
 
 static int check_elem(asm_list_t *list)
 {
-    char **tab = my_spliter(list->line, ' ');
+    char **tab = my_spliter2(list->line, ' ');
     int error = 0;
     int size = 0;
 
-    printf("coucou check elem\n");
     for (; tab[size] != NULL; size++);
     if (size != list->asm_line.nbr_args + list->pos + 1)
         return (1);
@@ -73,17 +70,12 @@ int check_list_elem(asm_list_t *list)
 {
     asm_list_t *backup = list;
 
-    printf("check list\n%p", list);
-
-    for (; list == NULL; list = list->next) {
-        printf("%s\n", list->line);
+    for (; list != NULL; list = list->next) {
         if (check_elem(list) != 0) {
             list = backup;
-            printf("error lol\n");
             return (EXIT_ERR);
         }
     }
-    printf("C OK lol\n");
     list = backup;
     return (EXIT_OK);
 }

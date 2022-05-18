@@ -7,9 +7,17 @@
 
 #include "../include/asm.h"
 
+static void compare_mnemonique(char **line, int i, int j, asm_list_t *list)
+{
+    if (my_strcmp(op_tab[i].mnemonique, line[j]) == 1) {
+        list->asm_line = op_tab[i];
+        list->pos = j;
+    }
+}
+
 static int pars_code(asm_list_t *list)
 {
-    char **line = my_spliter(list->line, ' ');
+    char **line = my_spliter2(list->line, ' ');
     int j = 0;
 
     list->pos = -1;
@@ -20,10 +28,8 @@ static int pars_code(asm_list_t *list)
             i = 0;
             j++;
         }
-        if (my_strcmp(op_tab[i].mnemonique, line[j]) == 1) {
-            list->asm_line = op_tab[i];
-            list->pos = j;
-        }
+        if (line[j] != NULL)
+            compare_mnemonique(line, i, j, list);
     }
     free_double_array(line);
     if (list->pos == -1)
@@ -36,7 +42,7 @@ int pars_code_list(asm_list_t *list)
     asm_list_t *backup = list;
     int check_error = 0;
 
-    for (; list == NULL; list = list->next) {
+    for (; list != NULL; list = list->next) {
         check_error = pars_code(list);
         if (check_error == EXIT_ERR)
             return (EXIT_ERR);
