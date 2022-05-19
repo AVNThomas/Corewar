@@ -6,8 +6,6 @@ a.out
 *~
 *.o
 vgcore*
-op.h
-op.c
 tags
 asm/*.cor
 asm/*.s
