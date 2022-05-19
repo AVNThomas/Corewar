@@ -7,6 +7,23 @@
 
 #include "../include/asm.h"
 
+static void get_bytemask(asm_list_t *list, int core)
+{
+    char bytemask = 0;
+
+    if (list->asm_line.nbr_args == 1 && list->asm_line.type[0] != 1)
+        return;
+    for (int i = 0; i != list->asm_line.nbr_args; i++) {
+        if (check_type(list->tab[list->pos + i + 1]) == 1)
+            bytemask |= 1;
+        if (check_type(list->tab[list->pos + i + 1]) == 2)
+            bytemask |= 2;
+        if (check_type(list->tab[list->pos + i + 1]) == 4)
+            bytemask |= 3;
+    }
+    return;
+}
+
 static int write_arg(int core, asm_list_t *list, asm_list_t *ref)
 {
     asm_list_t *back = ref;
@@ -16,7 +33,8 @@ static int write_arg(int core, asm_list_t *list, asm_list_t *ref)
         if (!list->good)
             continue;
         if (write(core, &list->asm_line.code, sizeof(char)) == -1)
-            ret_stat = EXIT_ERR;
+            return (EXIT_ERR);
+        get_bytemask(list->tab, list->asm_line.nbr_args, core);
         size_arg(core, list, ref);
         ref = back;
     }
