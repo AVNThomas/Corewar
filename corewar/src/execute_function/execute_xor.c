@@ -7,7 +7,7 @@
 
 #include "../../include/corewar.h"
 
-int ret_value1(corewar_t *g, champions_t *champ, int value1)
+static int ret_value1(corewar_t *g, champions_t *champ, int value1)
 {
     if (champ->instru[0].rid == 'r')
         value1 = champ->registre[champ->instru[0].value - 1];
@@ -19,7 +19,7 @@ int ret_value1(corewar_t *g, champions_t *champ, int value1)
     return (value1);
 }
 
-int ret_value2(corewar_t *g, champions_t *champ, int value2)
+static int ret_value2(corewar_t *g, champions_t *champ, int value2)
 {
     if (champ->instru[1].rid == 'r')
         value2 = champ->registre[champ->instru[1].value - 1];
