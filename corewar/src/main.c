@@ -38,6 +38,7 @@ void fill_champ(corewar_t *g)
 {
     args_t *tmp = NULL;
 
+    printf("List of champions :\n");
     print_list(g->list);
     while (g->list != NULL) {
         find_header(g, g->list->name);
@@ -57,6 +58,7 @@ int main (int ac, char **argv)
     if (!g)
         return (84);
     g = my_memset(g, 0, sizeof(corewar_t));
+    g->list = NULL;
     ret_value = arg_handler(g, ac, argv);
     if (ret_value == 84 || ret_value == 0) {
         free(g);
