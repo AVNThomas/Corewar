@@ -41,5 +41,7 @@ int pars_code_list(asm_list_t *list);
 int check_list_elem(asm_list_t *list);
 int check_type(char *word);
 int get_size_elem(char *word, int type);
+int get_size_prog(asm_list_t *list);
+int size_arg(int core, asm_list_t *list, asm_list_t *ref_list);
 
 #endif
