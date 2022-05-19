@@ -18,21 +18,20 @@ static void compare_mnemonique(char **line, int i, int j, asm_list_t *list)
 
 static int pars_code(asm_list_t *list)
 {
-    char **line = my_spliter(list->line, ' ');
     int j = 0;
 
+    list->tab = my_spliter(list->line, ' ');
     list->pos = -1;
-    if (line == NULL)
+    if (list->tab == NULL)
         return (EXIT_ERR);
-    for (int i = 0; list->pos == -1 && line[j] != NULL; i++) {
+    for (int i = 0; list->pos == -1 && list->tab[j] != NULL; i++) {
         if (op_tab[i].nbr_args == 0) {
             i = 0;
             j++;
         }
-        if (line[j] != NULL)
-            compare_mnemonique(line, i, j, list);
+        if (list->tab[j] != NULL)
+            compare_mnemonique(list->tab, i, j, list);
     }
-    free_double_array(line);
     if (list->pos == -1)
         list->good = 0;
     return (0);

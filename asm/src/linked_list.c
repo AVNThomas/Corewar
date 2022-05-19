@@ -14,6 +14,7 @@ void free_linked_list(asm_list_t *list)
     while (list != NULL) {
         stock = list;
         list = list->next;
+        free_double_array(stock->tab);
         free(stock->line);
         free(stock);
     }
