@@ -10,19 +10,19 @@
 static int write_arg(int core, asm_list_t *list, asm_list_t *ref)
 {
     asm_list_t *back = ref;
+    int ret_stat = EXIT_OK;
 
     for (; list != NULL; list = list->next) {
-        printf("line = %s\n", list->line);
-        if (list->good) {
-            printf("code = %x\n", list->asm_line.code);
-            write(core, &list->asm_line.code, sizeof(char));
-        }
+        if (!list->good)
+            continue;
+        if (write(core, &list->asm_line.code, sizeof(char)) == -1)
+            ret_stat = EXIT_ERR;
         size_arg(core, list, ref);
         printf("\n");
+        ref = back;
     }
     list = back;
-    ref = back;
-    return (EXIT_OK);
+    return (ret_stat);
 }
 
 int write_prog(int core, asm_list_t *list)
@@ -30,7 +30,10 @@ int write_prog(int core, asm_list_t *list)
     asm_list_t *back = list;
     asm_list_t *list_ref = list;
 
-    write_arg(core, list, list_ref);
+    if (write_arg(core, list, list_ref) == EXIT_ERR) {
+        list = back;
+        return (EXIT_ERR);
+    }
     list = back;
     return (EXIT_OK);
 }
@@ -38,7 +41,8 @@ int write_prog(int core, asm_list_t *list)
 static int write_header(int core, header_t *header, asm_list_t *list)
 {
     header->prog_size = get_size_prog(list);
-    write(core, header, sizeof(header_t));
+    if (write(core, header, sizeof(header_t)) == -1)
+        return (EXIT_ERR);
     return (EXIT_OK);
 }
 

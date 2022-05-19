@@ -60,6 +60,7 @@ asm_list_t *add_nod_list(asm_list_t *list, char *line)
     if (nod == NULL)
         return (NULL);
     backup = list;
+    nod->bitmask = 0;
     nod->line = NULL;
     nod->line = my_strcpy_malloc(nod->line, line);
     nod->size = 0;

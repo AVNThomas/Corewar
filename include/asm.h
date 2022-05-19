@@ -20,6 +20,7 @@ typedef struct asm_list_s {
     int size;
     op_t asm_line;
     int pos;
+    char bitmask;
     int good;
     struct asm_list_s *next;
 } asm_list_t;
