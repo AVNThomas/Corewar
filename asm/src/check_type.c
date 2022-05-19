@@ -14,7 +14,7 @@ static int check_register(char *word)
     if (word[0] != 'r')
         return (0);
     word++;
-    size = atoi(word);
+    size = my_atoi(word);
     if (size < 1 || size > REG_NUMBER)
         return (0);
     word--;
@@ -25,7 +25,7 @@ int check_type(char *word)
 {
     if (check_register(word))
         return (1);
-    else if (word[0] == '%')
+    else if (word[0] == DIRECT_CHAR)
         return (4);
     else
         return (2);
