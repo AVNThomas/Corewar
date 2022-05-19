@@ -7,56 +7,32 @@
 
 #include "../include/asm.h"
 
-static int special_size(asm_list_t *list, char **tab)
+static int write_arg(int core, asm_list_t *list, asm_list_t *ref)
 {
-    int i = 0;
-
-    if (list->asm_line.code == 10)
-        return (6);
-    if (list->asm_line.code == 9 || list->asm_line.code == 12)
-        return (3);
-    if (list->asm_line.code == 1)
-        return (5);
-    i++;
-    for (int j = 0; j != list->asm_line.nbr_args; j++) {
-        if (check_type(tab[list->pos + j + 1]) == 1)
-            i++;
-        else
-            i += 2;
-    }
-    return (i);
-}
-
-static int get_size_line(asm_list_t *list)
-{
-    char **tab = my_spliter(list->line, ' ');
-
-    if (!(list->asm_line.nbr_args == 1 && list->asm_line.type[0] != 1))
-        list->size++;
-    if ((list->asm_line.code >= 9 && list->asm_line.code <= 12) ||
-    list->asm_line.code == 1)
-        list->size += special_size(list, tab);
-    else {
-        list->size++;
-        for (int j = 0; j != list->asm_line.nbr_args; j++)
-            list->size += check_type(tab[list->pos + j + 1]);
-    }
-    free_double_array(tab);
-    return (list->size);
-}
-
-static int get_size_prog(asm_list_t *list)
-{
-    int size = 0;
-    asm_list_t *backup = list;
+    asm_list_t *back = ref;
 
     for (; list != NULL; list = list->next) {
-        if (list->good == 1)
-            size += get_size_line(list);
+        printf("line = %s\n", list->line);
+        if (list->good) {
+            printf("code = %x\n", list->asm_line.code);
+            write(core, &list->asm_line.code, sizeof(char));
+        }
+        size_arg(core, list, ref);
+        printf("\n");
     }
-    list = backup;
-    size = __builtin_bswap32(size);
-    return (size);
+    list = back;
+    ref = back;
+    return (EXIT_OK);
+}
+
+int write_prog(int core, asm_list_t *list)
+{
+    asm_list_t *back = list;
+    asm_list_t *list_ref = list;
+
+    write_arg(core, list, list_ref);
+    list = back;
+    return (EXIT_OK);
 }
 
 static int write_header(int core, header_t *header, asm_list_t *list)

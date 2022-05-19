@@ -43,7 +43,7 @@ static void print_dir(char *arg, int core, asm_list_t *ref)
     core = core;
 }
 
-static int size_arg(int core, asm_list_t *list, asm_list_t *ref_list)
+int size_arg(int core, asm_list_t *list, asm_list_t *ref_list)
 {
     char **tab = my_spliter(list->line, ' ');
     char where = 0;
@@ -63,32 +63,4 @@ static int size_arg(int core, asm_list_t *list, asm_list_t *ref_list)
     }
     free_double_array(tab);
     return (where);
-}
-
-static int write_arg(int core, asm_list_t *list, asm_list_t *ref)
-{
-    asm_list_t *back = ref;
-
-    for (; list != NULL; list = list->next) {
-        printf("line = %s\n", list->line);
-        if (list->good) {
-            printf("code = %x\n", list->asm_line.code);
-            write(core, &list->asm_line.code, sizeof(char));
-        }
-        size_arg(core, list, ref);
-        printf("\n");
-    }
-    list = back;
-    ref = back;
-    return (EXIT_OK);
-}
-
-int write_prog(int core, asm_list_t *list)
-{
-    asm_list_t *back = list;
-    asm_list_t *list_ref = list;
-
-    write_arg(core, list, list_ref);
-    list = back;
-    return (EXIT_OK);
 }
