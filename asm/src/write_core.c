@@ -18,7 +18,6 @@ static int write_arg(int core, asm_list_t *list, asm_list_t *ref)
         if (write(core, &list->asm_line.code, sizeof(char)) == -1)
             ret_stat = EXIT_ERR;
         size_arg(core, list, ref);
-        printf("\n");
         ref = back;
     }
     list = back;
