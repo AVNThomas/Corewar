@@ -21,6 +21,7 @@ SRCS	=	src/compile_prog.c\
 		src/op.c\
 		src/check_type.c\
 		src/get_size.c\
+		src/find_zjump.c\
 
 SRCS_TEST	=	tests/tests_asm.c\
 
