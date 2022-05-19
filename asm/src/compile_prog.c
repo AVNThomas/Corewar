@@ -50,12 +50,10 @@ int compile_asm(char *asm_buff, int core_fd)
     if (header == NULL)
         return (EXIT_ERR);
     list = compile_core(list, asm_buff);
-    if (list == NULL) {
-        free(header);
-        return (EXIT_ERR);
+    if (list != NULL) {
+        pars_code_list(list);
+        ret_stat = check_list_elem(list);
     }
-    pars_code_list(list);
-    ret_stat = check_list_elem(list);
     write_core(core_fd, header, list);
     return (ret_stat);
 }

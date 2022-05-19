@@ -39,7 +39,9 @@ int write_prog(int core, asm_list_t *list)
 
 static int write_header(int core, header_t *header, asm_list_t *list)
 {
-    header->prog_size = get_size_prog(list);
+    if (list != NULL) {
+        header->prog_size = get_size_prog(list);
+    }
     if (write(core, header, sizeof(header_t)) == -1)
         return (EXIT_ERR);
     return (EXIT_OK);
@@ -47,10 +49,12 @@ static int write_header(int core, header_t *header, asm_list_t *list)
 
 int write_core(int core, header_t *header, asm_list_t *list)
 {
+
     if (write_header(core, header, list) == EXIT_ERR)
         return (EXIT_ERR);
-    if (write_prog(core, list) == EXIT_ERR)
-        return (EXIT_ERR);
+    if (list != NULL)
+        if (write_prog(core, list) == EXIT_ERR)
+            return (EXIT_ERR);
     free(header);
     free_linked_list(list);
     return (EXIT_OK);
