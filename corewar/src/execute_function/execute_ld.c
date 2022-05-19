@@ -10,6 +10,8 @@
 void execute_ld(corewar_t *g, champions_t *champ)
 {
     int value = 0;
+
+    champ->carry = 0;
     if (champ->instru[0].rid == 'r')
         return;
     if (champ->instru[1].rid != 'r')
@@ -24,4 +26,5 @@ void execute_ld(corewar_t *g, champions_t *champ)
         champ->registre[champ->instru[1].value - 1] =
         g->vm[(champ->head + value % IDX_MOD) % MEM_SIZE];
     }
+    champ->carry = 1;
 }

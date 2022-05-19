@@ -27,6 +27,7 @@ typedef struct champions_s {
     int prog_size;
     int number;
     int load_adress;
+    int carry;
     int head;
     int tail;
     FILE *ptr;

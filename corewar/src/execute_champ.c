@@ -43,6 +43,7 @@ void execute_champion(corewar_t *g)
 {
     for (champions_t *tmp = g->champ; tmp != NULL; tmp = tmp->next) {
         if (tmp->cycles == 0) {
+            printf("%s\n", op_tab[tmp->instruction].mnemonique);
             execute_function(tmp, g);
             advance_to_next_func(tmp, g);
         }

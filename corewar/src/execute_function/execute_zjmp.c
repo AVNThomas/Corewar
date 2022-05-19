@@ -9,9 +9,15 @@
 
 void execute_zjmp(corewar_t *g, champions_t *champ)
 {
+    short value = 0;
+
     if (champ->instru[0].rid != 'd')
         return;
+    printf("zjmp %d\n", champ->instru[0].value);
     if (champ->carry == 0)
         return;
-    champ->head = (champ->head + champ->instru[0].value % IDX_MOD) % MEM_SIZE;
+    value = (short)champ->instru[0].value;
+    printf("head %d\n", champ->head);
+    champ->head = (champ->head + value % IDX_MOD) % MEM_SIZE;
+    printf("head %d\n", champ->head);
 }

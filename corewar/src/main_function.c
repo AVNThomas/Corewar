@@ -28,5 +28,7 @@ static func_ptn_t func_pointer[16] = {
 
 void execute_function(champions_t *champ, corewar_t *g)
 {
+    if (champ->instruction < 0 || champ->instruction > 16)
+        return;
     func_pointer[champ->instruction].ptr_fct(g, champ);
 }

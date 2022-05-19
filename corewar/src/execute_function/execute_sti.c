@@ -12,7 +12,7 @@ void execute_sti(corewar_t *g, champions_t *champ)
     int value1 = 0;
     int value2 = 0;
 
-    if (champ->instru[1].rid != 'r' || champ->instru[2].rid == 'i')
+    if (champ->instru[0].rid != 'r' || champ->instru[2].rid == 'i')
         return;
     if (champ->instru[1].rid == 'r')
         value1 = champ->registre[champ->instru[1].value - 1];

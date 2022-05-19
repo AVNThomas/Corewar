@@ -11,6 +11,7 @@ void execute_ldi(corewar_t *g, champions_t *champ)
 {
     int value1 = 0;
     int value2 = 0;
+    champ->carry = 0;
 
     if (champ->instru[1].rid != 'i' || champ->instru[2].rid != 'r')
         return;
@@ -26,4 +27,5 @@ void execute_ldi(corewar_t *g, champions_t *champ)
     if (champ->instru[1].rid == 'd')
         value2 = champ->instru[1].value;
     champ->registre[champ->instru[2].value - 1] = value1 + value2;
+    champ->carry = 1;
 }
