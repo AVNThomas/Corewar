@@ -60,6 +60,7 @@ int arg_list_handler(corewar_t *g, char **av, int i)
     if (i == -1)
         return (-1);
     if (my_strstr(".cor", av[i])) {
+        printf("HERE\n");
         g->nb_player++;
         if (g->tmp_nb_player != -1) {
             add_node(&g->list, av[i], g->tmp_nb_player,

@@ -20,12 +20,15 @@ void revert_endianess(corewar_t *g, champions_t *champ)
 void place_champion(corewar_t *g)
 {
     int load_adress[g->nb_player];
+    printf("nb_player: %d\n", g->nb_player);
     champions_t *tmp = g->champ;
 
     for (int i = 0; i < g->nb_player; i++) {
-        load_adress[i] = MEM_SIZE / g->nb_player * i;
+        load_adress[i] = MEM_SIZE / (g->nb_player) * i;
+        printf("load_adress[%d]: %d\n", i, load_adress[i]);
     }
     for (int i = 0; i < g->nb_player; i++) {
+        printf("i: %d\n", i);
         tmp->load_adress = load_adress[i];
         tmp->head = load_adress[i];
         tmp->tail = load_adress[i];
