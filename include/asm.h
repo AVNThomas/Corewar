@@ -40,5 +40,6 @@ void free_linked_list(asm_list_t *list);
 int pars_code_list(asm_list_t *list);
 int check_list_elem(asm_list_t *list);
 int check_type(char *word);
+int get_size_elem(char *word, int type);
 
 #endif
