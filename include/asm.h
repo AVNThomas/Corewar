@@ -22,6 +22,7 @@ typedef struct asm_list_s {
     int pos;
     char bitmask;
     int good;
+    char **tab;
     struct asm_list_s *next;
 } asm_list_t;
 

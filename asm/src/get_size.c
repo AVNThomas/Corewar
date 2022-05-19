@@ -29,19 +29,16 @@ static int special_size(asm_list_t *list, char **tab)
 
 static int get_size_line(asm_list_t *list)
 {
-    char **tab = my_spliter(list->line, ' ');
-
     if (!(list->asm_line.nbr_args == 1 && list->asm_line.type[0] != 1))
         list->size++;
     if ((list->asm_line.code >= 9 && list->asm_line.code <= 12) ||
     list->asm_line.code == 1)
-        list->size += special_size(list, tab);
+        list->size += special_size(list, list->tab);
     else {
         list->size++;
         for (int j = 0; j != list->asm_line.nbr_args; j++)
-            list->size += check_type(tab[list->pos + j + 1]);
+            list->size += check_type(list->tab[list->pos + j + 1]);
     }
-    free_double_array(tab);
     return (list->size);
 }
 

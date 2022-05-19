@@ -77,12 +77,11 @@ static void print_dir(char *arg, int core, asm_list_t *ref)
 
 int size_arg(int core, asm_list_t *list, asm_list_t *ref_list)
 {
-    char **tab = my_spliter(list->line, ' ');
     asm_list_t *back = ref_list;
     char *arg = NULL;
 
     for (int i = 0; i != list->asm_line.nbr_args; i++) {
-        arg = tab[list->pos + i + 1];
+        arg = list->tab[list->pos + i + 1];
         printf("%s\n", list->line);
         if (get_size_elem(arg, list->asm_line.code) == REG_SIZE)
             print_reg(arg, core);
@@ -92,6 +91,5 @@ int size_arg(int core, asm_list_t *list, asm_list_t *ref_list)
             print_dir(arg, core, ref_list);
         ref_list = back;
     }
-    free_double_array(tab);
     return (EXIT_OK);
 }

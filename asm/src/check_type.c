@@ -52,17 +52,15 @@ static int check_type_elem(asm_list_t *list, char **tab, int i)
 
 static int check_elem(asm_list_t *list)
 {
-    char **tab = my_spliter(list->line, ' ');
     int error = 0;
     int size = 0;
 
-    for (; tab[size] != NULL; size++);
+    for (; list->tab[size] != NULL; size++);
     if (size != list->asm_line.nbr_args + list->pos + 1)
         return (1);
     for (int i = 0; i != list->asm_line.nbr_args; i++) {
-        error = check_type_elem(list, tab, i);
+        error = check_type_elem(list, list->tab, i);
     }
-    free_double_array(tab);
     return (error);
 }
 
