@@ -10,4 +10,7 @@
 void execute_live(corewar_t *g, champions_t *champ)
 {
     my_printf("The player %d(%s)is alive\n", champ->number, champ->name);
+    champ->alive = 1;
+    champ->cycle_to_die = g->cycle_to_die;
+    g->nb_live--;
 }

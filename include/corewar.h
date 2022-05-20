@@ -29,9 +29,11 @@ typedef struct champions_s {
     int load_adress;
     int carry;
     int head;
+    int alive;
     int tail;
     FILE *ptr;
     int cycles;
+    int cycle_to_die;
     int instruction;
     instruction_t instru[4];
     int registre[REG_NUMBER];
@@ -61,6 +63,9 @@ typedef struct corewar_s {
     int load_adress;
     args_t *list;
     u_char *vm;
+    int cycle_to_die;
+    int cycle_delta;
+    int nb_live;
     champions_t *champ;
 }corewar_t;
 

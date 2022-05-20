@@ -31,5 +31,8 @@ corewar_t *init_struct(corewar_t *g)
     if (g->vm == NULL)
         return (NULL);
     g->vm = set_null_value(g->vm, MEM_SIZE);
+    g->cycle_to_die = CYCLE_TO_DIE;
+    g->cycle_delta = CYCLE_DELTA;
+    g->nb_live = 0;
     return (g);
 }

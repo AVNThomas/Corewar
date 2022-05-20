@@ -21,8 +21,7 @@ u_char *my_strucpy(u_char *dest, u_char const *src, int size)
 {
     int i = 0;
 
-    for (; i <= size; i++)
+    for (; i < size; i++)
         dest[i] = src[i];
-    dest[i] = '\0';
-    return dest;
+    return (dest);
 }

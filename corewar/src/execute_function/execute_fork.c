@@ -15,6 +15,7 @@ void fork_champ(champions_t *champ)
     printf("champion %s forks\n", champ->name);
     tmp->name = my_strcpy_malloc(tmp->name, champ->name);
     tmp->comment = my_strcpy_malloc(tmp->comment, champ->comment);
+    printf("champ code%s\nprog_size%d\n", champ->code, champ->prog_size);
     tmp->code = my_strucpy_malloc(tmp->code, champ->code, champ->prog_size);
     tmp->prog_size = champ->prog_size;
     tmp->number = champ->number;
@@ -22,6 +23,7 @@ void fork_champ(champions_t *champ)
     tmp->carry = champ->carry;
     tmp->head = champ->head;
     tmp->tail = champ->tail;
+    tmp->cycle_to_die = champ->cycle_to_die;
     FILE *ptr = NULL;
     tmp->cycles = 0;
     tmp->instruction = 0;
