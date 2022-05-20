@@ -6,7 +6,6 @@
 */
 
 #include "../include/asm.h"
-#include <bits/types/stack_t.h>
 
 static int check_elem(char *elem, char *valid_char, int i)
 {

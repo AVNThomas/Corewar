@@ -21,9 +21,11 @@ int name_header(char **asm_buff, char *header)
 {
     char *tmp = find_line(asm_buff, NAME_CMD_STRING);
     int last_quote = 0;
+
     if (tmp == NULL)
         return (EXIT_ERR);
-    for (int i = my_strlen(NAME_CMD_STRING); i > -2; i--, tmp++);
+    for (; *tmp != '"'; tmp++);
+    tmp++;
     for (; tmp[last_quote] != '"'; last_quote++);
     tmp[last_quote] = '\0';
     header = my_strcpy(header, tmp);
@@ -34,9 +36,11 @@ int comment_header(char **asm_buff, char *header)
 {
     char *tmp = find_line(asm_buff, COMMENT_CMD_STRING);
     int last_quote = 0;
+
     if (tmp == NULL)
         return (EXIT_ERR);
-    for (int i = my_strlen(COMMENT_CMD_STRING); i > -2; i--, tmp++);
+    for (; *tmp != '"'; tmp++);
+    tmp++;
     for (; tmp[last_quote] != '"'; last_quote++);
     tmp[last_quote] = '\0';
     header = my_strcpy(header, tmp);
