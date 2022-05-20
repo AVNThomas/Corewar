@@ -23,23 +23,12 @@ static int check_valid(char *elem, char *valid_char)
     return (EXIT_OK);
 }
 
-static int char_is_inside(char c, char *str)
-{
-    for (int i = 0; str[i] != '\0'; i++)
-        if (c == str[i])
-            return (1);
-    return(0);
-}
-
 static char *remove_useless_char(char *tab)
 {
     char *tmp = tab;
-    int i = 0;
 
-    while (char_is_inside(tmp[i], LABEL_CHARS)) {
+    if (tab[0] == '\t')
         tmp++;
-        i++;
-    }
     return (tmp);
 }
 

@@ -22,6 +22,7 @@ int name_header(char **asm_buff, char *header)
     char *tmp = find_line(asm_buff, NAME_CMD_STRING);
     int last_quote = 0;
 
+    printf("bite");
     if (tmp == NULL)
         return (EXIT_ERR);
     for (; *tmp != '"'; tmp++);

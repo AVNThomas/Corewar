@@ -49,6 +49,7 @@ int compile_asm(char *asm_buff, int core_fd)
     header = generate_header(header, asm_buff);
     if (header == NULL)
         return (EXIT_ERR);
+    asm_buff = clean_buff(asm_buff);
     list = compile_core(list, asm_buff);
     if (list != NULL) {
         pars_code_list(list);

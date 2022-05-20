@@ -16,10 +16,10 @@ static int create_core_file(char const *name)
     return (fd);
 }
 
-static char *clean_buff(char *buff)
+char *clean_buff(char *buff)
 {
     for (int i = 0; buff[i] != '\0'; i++)
-        if (buff[i] == ',' || buff[i] == '\t')
+        if (buff[i] == SEPARATOR_CHAR || buff[i] == '\t')
             buff[i] = ' ';
     return (buff);
 }
@@ -32,7 +32,7 @@ int generate_core(FILE *asm_fd, char const *name)
 
     if (core_fd == -1)
         return (EXIT_ERR);
-    asm_buff = clean_buff(getline_file(asm_fd));
+    asm_buff = getline_file(asm_fd);
     if (asm_buff == NULL) {
         close(core_fd);
         return (EXIT_ERR);

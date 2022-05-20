@@ -38,13 +38,14 @@ static void print_ind(char *arg, int core, asm_list_t *ref, asm_list_t *list)
         *(short*) ind += where;
         ref = back;
     }
-    else {
+    else if (arg[0] == DIRECT_CHAR){
         arg++;
         *(short*)ind = my_atoi(arg);
         arg--;
+    } else {
+        *(short*) ind = my_atoi(arg);
     }
     *(short*) ind = __builtin_bswap16(*(short*) ind);
-    printf("ind %x\n", *(short*) ind);
     write(core, ind, IND_SIZE);
 }
 
@@ -58,14 +59,14 @@ static void print_dir(char *arg, int core, asm_list_t *ref, asm_list_t *list)
         where = where_in_list(arg, ref, list);
         dir += where;
         ref = back;
-    }
-    else {
+    } else if (arg[0] == DIRECT_CHAR){
         arg++;
         dir = my_atoi(arg);
         arg--;
+    } else {
+        dir = my_atoi(arg);
     }
     dir = __builtin_bswap32(dir);
-    printf("dir %x\n", dir);
     write(core, &dir, DIR_SIZE);
 }
 
@@ -76,7 +77,6 @@ int size_arg(int core, asm_list_t *list, asm_list_t *ref_list)
 
     for (int i = 0; i != list->asm_line.nbr_args; i++) {
         arg = list->tab[list->pos + i + 1];
-        printf("%s\n", list->line);
         if (get_size_elem(arg, list->asm_line.code) == REG_SIZE)
             print_reg(arg, core);
         if (get_size_elem(arg, list->asm_line.code) == IND_SIZE)
@@ -84,7 +84,6 @@ int size_arg(int core, asm_list_t *list, asm_list_t *ref_list)
         if (get_size_elem(arg, list->asm_line.code) == DIR_SIZE)
             print_dir(arg, core, ref_list, list);
         ref_list = back;
-        printf("\n");
     }
     return (EXIT_OK);
 }

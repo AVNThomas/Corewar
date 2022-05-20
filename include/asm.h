@@ -43,6 +43,7 @@ int pars_code_list(asm_list_t *list);
 int check_list_elem(asm_list_t *list);
 int check_type(char *word);
 int get_size_elem(char *word, int type);
+char *clean_buff(char *buff);
 int get_size_prog(asm_list_t *list);
 void get_bytemask(asm_list_t *list, int core);
 int size_arg(int core, asm_list_t *list, asm_list_t *ref_list);
