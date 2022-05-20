@@ -6,6 +6,7 @@
 */
 
 #include "../include/asm.h"
+#include <bits/types/stack_t.h>
 
 static int check_elem(char *elem, char *valid_char, int i)
 {
@@ -23,12 +24,20 @@ static int check_valid(char *elem, char *valid_char)
     return (EXIT_OK);
 }
 
+static int char_is_inside(char c, char *str)
+{
+    for (int i = 0; str[i] != '\0'; i++)
+        if (c == str[i])
+            return (1);
+    return(0);
+}
+
 static char *remove_useless_char(char *tab)
 {
     char *tmp = tab;
     int i = 0;
 
-    while (!my_char_is_alpha(tmp[i])) {
+    while (char_is_inside(tmp[i], LABEL_CHARS)) {
         tmp++;
         i++;
     }

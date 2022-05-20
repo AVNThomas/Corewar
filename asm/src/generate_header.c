@@ -51,7 +51,7 @@ header_t *generate_header(header_t *header, char *asm_buff)
         return (NULL);
     if (magic_header(&(*header).magic) == EXIT_ERR ||
     name_header(tab, header->prog_name) == EXIT_ERR ||
-    comment_header(tab, header->comment)) {
+    comment_header(tab, header->comment) == EXIT_ERR) {
         free_double_array(tab);
         return (NULL);
     }
