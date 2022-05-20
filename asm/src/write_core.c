@@ -7,27 +7,6 @@
 
 #include "../include/asm.h"
 
-static void get_bytemask(asm_list_t *list, int core)
-{
-    unsigned char bitmask = 0;
-
-    if (list->asm_line.nbr_args == 1 && list->asm_line.type[0] != 1)
-        return;
-    for (int i = 0; i < list->asm_line.nbr_args; i++) {
-        bitmask = bitmask << 2;
-        if (check_type(list->tab[list->pos + i + 1]) == REG_SIZE)
-            bitmask += 1;
-        if (check_type(list->tab[list->pos + i + 1]) == DIR_SIZE)
-            bitmask += 2;
-        if (check_type(list->tab[list->pos + i + 1]) == IND_SIZE)
-            bitmask += 3;
-        my_printf("bitmask %b\n", bitmask);
-    }
-    printf("bitmask %x\n", bitmask);
-    write(core, &bitmask, sizeof(char));
-    return;
-}
-
 static int write_arg(int core, asm_list_t *list, asm_list_t *ref)
 {
     asm_list_t *back = ref;
