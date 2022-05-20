@@ -31,9 +31,9 @@ int zjump_size(asm_list_t *list, asm_list_t *zjump, char *word)
         elem2++;
     list = backup;
     if (elem1 > elem2)
-        result = compute_size(list, elem2, elem1);
+        result = (compute_size(list, elem2, elem1));
     else
-        result = compute_size(list, elem1, elem2);
+        result = (compute_size(list, elem1, elem2) * -1);
     list = backup;
     return (result);
 }
