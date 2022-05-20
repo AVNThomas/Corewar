@@ -28,7 +28,6 @@ void place_champion(corewar_t *g)
         printf("load_adress[%d]: %d\n", i, load_adress[i]);
     }
     for (int i = 0; i < g->nb_player; i++) {
-        printf("i: %d\n", i);
         tmp->load_adress = load_adress[i];
         tmp->head = load_adress[i];
         tmp->tail = load_adress[i];

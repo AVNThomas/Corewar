@@ -119,3 +119,4 @@ args_t *add_argument(args_t *list, char *name, int address, int nb_player);
 void execute_function(champions_t *champ, corewar_t *g);
 void advance_to_next_func(champions_t *champ, corewar_t *g);
 args_t *add_node(args_t *list, char *name, int nb_player, int address);
+void fork_champ(champions_t *champ);

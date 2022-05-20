@@ -12,11 +12,11 @@ int helper(char *prog, int ret_val)
     my_printf("USAGE:\n%s [-dump nbr_cycle] [[-n prog_number] ", prog);
     my_printf("[-a load_address] prog_name]\n");
     my_printf("DESCRIPTION:\n-dump nbr_cycle dumps the memory after the ");
-    my_printf("nbr_cycle execution (if the round isn’t already over) with ");
+    my_printf("nbr_cycle execution (if the round isn't already over) with ");
     my_printf("the following format: 32 bytes/line in hexadecimal ");
-    my_printf("(A0BCDEFE1DD3...)\n-n prog_number sets the next program’s ");
+    my_printf("(A0BCDEFE1DD3...)\n-n prog_number sets the next program's ");
     my_printf("number. By default, the first free number in the parameter ");
-    my_printf("order\n-a load_address sets the next program’s loading ");
+    my_printf("order\n-a load_address sets the next program's loading ");
     my_printf("address. When no address is specified, optimize the ");
     my_printf("addresses so that the processes are as far away from");
     my_printf("each other as possible. The addresses are MEM_SIZE modulo.\n");
