@@ -7,7 +7,7 @@
 
 #include "../include/corewar.h"
 
-unsigned char *set_null_value(unsigned char *value, int size)
+u_char *set_null_value(u_char *value, int size)
 {
     for (int i = 0; i < size; i++)
         value[i] = 0;

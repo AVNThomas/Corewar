@@ -23,7 +23,7 @@ typedef struct instruction_s {
 typedef struct champions_s {
     char *name;
     char *comment;
-    unsigned char *code;
+    u_char *code;
     int prog_size;
     int number;
     int load_adress;
@@ -50,7 +50,7 @@ typedef struct vm_header_s {
     char *name;
     int prog_size;
     char *comment;
-    unsigned char *code;
+    u_char *code;
 }vm_header_t;
 
 typedef struct corewar_s {
@@ -60,7 +60,7 @@ typedef struct corewar_s {
     int tmp_nb_player;
     int load_adress;
     args_t *list;
-    unsigned char *vm;
+    u_char *vm;
     champions_t *champ;
 }corewar_t;
 
@@ -90,10 +90,10 @@ void free_champ(champions_t *champ);
 void free_arg(args_t *arg);
 void free_all(corewar_t *g);
 void place_champion(corewar_t *g);
-void write_char_in_mem(corewar_t *g, champions_t *champ, unsigned char *value,
+void write_char_in_mem(corewar_t *g, champions_t *champ, u_char *value,
 int size);
 int find_function(int mnemonic);
-unsigned char read_char_in_mem(corewar_t *g, champions_t *champ);
+u_char read_char_in_mem(corewar_t *g, champions_t *champ);
 void execute_champion(corewar_t *g);
 int get_argument(func_size_t *func_arg, int function,
 champions_t *champ, corewar_t *g);

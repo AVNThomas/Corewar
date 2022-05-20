@@ -9,7 +9,7 @@
 
 void execute_aff(corewar_t *g, champions_t *champ)
 {
-    unsigned char value = 0;
+    u_char value = 0;
     if (champ->instru[0].rid != 'r')
         return;
     value = (char)champ->registre[champ->instru[0].value - 1];

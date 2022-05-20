@@ -17,3 +17,13 @@ char *my_strcpy_malloc(char *dest, char const *src)
     dest = my_strcpy(dest, src);
     return (dest);
 }
+
+u_char *my_strucpy_malloc(u_char *dest, u_char const *src, int size)
+{
+    dest = malloc(sizeof(u_char) * (size + 1));
+    if (dest == NULL)
+        return (NULL);
+    dest = my_memset(dest, 0, size + 1);
+    dest = my_strucpy(dest, src, size);
+    return (dest);
+}

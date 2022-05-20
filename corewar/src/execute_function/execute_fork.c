@@ -13,9 +13,9 @@ void fork_champ(champions_t *champ)
     champions_t *next = champ->next;
 
     printf("champion %s forks\n", champ->name);
-    tmp->name = my_strcpy(tmp->name, champ->name);
-    tmp->comment = my_strcpy(tmp->comment, champ->comment);
-    tmp->code = my_strucpy(tmp->code, champ->code, champ->prog_size);
+    tmp->name = my_strcpy_malloc(tmp->name, champ->name);
+    tmp->comment = my_strcpy_malloc(tmp->comment, champ->comment);
+    tmp->code = my_strucpy_malloc(tmp->code, champ->code, champ->prog_size);
     tmp->prog_size = champ->prog_size;
     tmp->number = champ->number;
     tmp->load_adress = champ->load_adress;

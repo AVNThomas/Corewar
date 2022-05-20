@@ -9,5 +9,5 @@
 
 void execute_live(corewar_t *g, champions_t *champ)
 {
-    printf("The player %d(%s)is alive\n", champ->number, champ->name);
+    my_printf("The player %d(%s)is alive\n", champ->number, champ->name);
 }
