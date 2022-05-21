@@ -34,5 +34,7 @@ corewar_t *init_struct(corewar_t *g)
     g->cycle_to_die = CYCLE_TO_DIE;
     g->cycle_delta = CYCLE_DELTA;
     g->nb_live = 0;
+    g->last_number = -1;
+    g->last_name = NULL;
     return (g);
 }

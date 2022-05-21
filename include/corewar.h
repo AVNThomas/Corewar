@@ -63,6 +63,8 @@ typedef struct corewar_s {
     int load_adress;
     args_t *list;
     u_char *vm;
+    char *last_name;
+    int last_number;
     int cycle_to_die;
     int cycle_delta;
     int nb_live;
@@ -125,3 +127,5 @@ void execute_function(champions_t *champ, corewar_t *g);
 void advance_to_next_func(champions_t *champ, corewar_t *g);
 args_t *add_node(args_t *list, char *name, int nb_player, int address);
 void fork_champ(champions_t *champ);
+void print_hexa(int value);
+int decimal_to_hexa(int decimal);

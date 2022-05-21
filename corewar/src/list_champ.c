@@ -17,7 +17,7 @@ champions_t *init_node(champions_t *champ)
     champ->prog_size = 0;
     champ->ptr = NULL;
     champ->cycles = 0;
-    champ->cycle_to_die = CYCLE_TO_DIE;
+    champ->cycle_to_die = 0;
     champ->instruction = 0;
     champ->alive = 1;
     for (int i = 0; i <= 4; i++)

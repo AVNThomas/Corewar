@@ -24,6 +24,8 @@ u_char read_char_in_mem(corewar_t *g, champions_t *champ)
 
     value = g->vm[champ->head];
     champ->head++;
+    if (champ->head == MEM_SIZE)
+        champ->head = 0;
     return (value);
 }
 

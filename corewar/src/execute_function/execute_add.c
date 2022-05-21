@@ -16,5 +16,10 @@ void add_instru(champions_t *champ)
 
 void execute_add(corewar_t *g, champions_t *champ)
 {
+    champ->carry = 0;
+    if (champ->instru[0].rid != 'r' || champ->instru[1].rid != 'r' ||
+    champ->instru[2].rid != 'r')
+        return;
     add_instru(champ);
+    champ->carry = 1;
 }

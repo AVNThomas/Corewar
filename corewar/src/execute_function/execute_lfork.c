@@ -16,9 +16,10 @@ void execute_lfork(corewar_t *g, champions_t *champ)
     champ->load_adress = adress;
     champ->head = adress;
     champ->tail = adress;
-    write_char_in_mem(g, champ, champ->code, champ->prog_size);
+    champ->cycle_to_die = g->cycle_to_die;
+    for (int i = 0; i < champ->prog_size; i++) {
+        g->vm[(adress + i) % MEM_SIZE] = champ->code[i];
+    }
     champ->head = champ->tail;
     advance_to_next_func(champ, g);
-    printf("fork\n");
-    return;
 }
