@@ -6,15 +6,14 @@
 */
 
 #include "../include/my.h"
-#include <stdlib.h>
 
-char *my_strcpy_malloc(char *dest, char const *src)
+char *my_strdup(char const *src)
 {
-    dest = malloc(sizeof(char) * (my_strlen(src) + 1));
+    char *dest = malloc(sizeof(char) * (my_strlen(src) + 1));
 
     if (dest == NULL)
         return (NULL);
-    dest = my_memset(dest, 0, strlen(src) + 1);
+    dest = my_memset(dest, 0, my_strlen(src) + 1);
     dest = my_strcpy(dest, src);
     return (dest);
 }

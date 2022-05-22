@@ -30,24 +30,6 @@ char *getline_file(FILE *file)
     return (buffer);
 }
 
-char *stat_file(char *filepath)
-{
-    struct stat statbuff;
-    int file_d = 0;
-    char *buffer = NULL;
-
-    stat(filepath, &statbuff);
-    file_d = open(filepath, O_RDONLY);
-    if (file_d == -1)
-        return (NULL);
-    buffer = malloc(sizeof(char) * statbuff.st_size + 1);
-    if (read(file_d, buffer, statbuff.st_size) <= 0)
-        return (NULL);
-    close(file_d);
-    buffer[statbuff.st_size] = 0;
-    return (buffer);
-}
-
 int write_in_file(char const *filename, char const *data)
 {
     int file_d = 0;
