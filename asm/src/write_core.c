@@ -50,12 +50,16 @@ static int write_header(int core, header_t *header, asm_list_t *list)
 
 int write_core(int core, header_t *header, asm_list_t *list)
 {
-    if (write_header(core, header, list) == EXIT_ERR)
+    if (write_header(core, header, list) == EXIT_ERR) {
+        free(header);
         return (EXIT_ERR);
+    }
     free(header);
     if (list != NULL)
-        if (write_prog(core, list) == EXIT_ERR)
+        if (write_prog(core, list) == EXIT_ERR) {
+            free_linked_list(list);
             return (EXIT_ERR);
+        }
     free_linked_list(list);
     return (EXIT_OK);
 }

@@ -9,7 +9,7 @@
 
 static void compare_mnemonique(char **line, int i, int j, asm_list_t *list)
 {
-    if (my_strcmp(op_tab[i].mnemonique, line[j]) == 1) {
+    if (my_strcmp(op_tab[i].mnemonique, line[j])) {
         list->asm_line = op_tab[i];
         list->pos = j;
         list->good = 1;

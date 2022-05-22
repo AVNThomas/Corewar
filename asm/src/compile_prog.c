@@ -22,11 +22,12 @@ static asm_list_t *check_asm_line(char *line, asm_list_t *list)
     int size_comment = my_strlen(COMMENT_CMD_STRING);
     int size_name = my_strlen(NAME_CMD_STRING);
     int comment = -1;
+
     for (int comment_pos = 0; line[comment_pos] != '\0'; comment_pos++)
         if (line[comment_pos] == COMMENT_CHAR)
             line = remove_comment(line, comment_pos, comment);
-    if (my_strncmp(COMMENT_CMD_STRING, line, size_comment) == 0 ||
-        my_strncmp(NAME_CMD_STRING, line, size_name) == 0)
+    if (my_strncmp(COMMENT_CMD_STRING, line, size_comment)||
+        my_strncmp(NAME_CMD_STRING, line, size_name))
         return (0);
     list = add_nod_list(list, line);
     if (list == NULL) {

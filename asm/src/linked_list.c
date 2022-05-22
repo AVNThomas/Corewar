@@ -28,7 +28,7 @@ static int search_word(char *line, char *word)
     int i = 0;
 
     for (; i != (len_line - len_word + 1) && flag == 0; i++, line++) {
-        if (my_strncmp(line, word, len_word) == 0 && line[len_word] == ':')
+        if (my_strncmp(line, word, len_word) && line[len_word] == ':')
             flag = 1;
     }
     for (int j = 0; j != i; j++, line--);

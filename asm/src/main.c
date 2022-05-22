@@ -19,7 +19,7 @@ static int check_arg (int ac, char **argv)
 {
     if (ac > 2 || ac == 1)
         return (helper(argv[0], EXIT_ERR));
-    if (my_strncmp(argv[1], "-h", my_strlen("-h")) == 0)
+    if (my_strncmp(argv[1], "-h", my_strlen("-h")))
         helper(argv[0], EXIT_OK);
     return (EXIT_OK);
 }
@@ -65,7 +65,7 @@ int main (int ac, char **argv)
     FILE *file = NULL;
     char *name = NULL;
 
-    if (check_arg(ac, argv) != 0)
+    if (check_arg(ac, argv) != EXIT_OK)
         return (EXIT_ERR);
     name = get_filename(argv[1]);
     if (name == NULL)
