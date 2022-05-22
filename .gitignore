@@ -1,8 +1,0 @@
-asm/asm
-corewar/corewar
-a.out
-*.a
-#*#
-*~
-*.o
-corewar_binaries/
