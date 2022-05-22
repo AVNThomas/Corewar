@@ -22,4 +22,5 @@ void execute_sub(corewar_t *g, champions_t *champ)
         return;
     sous_instru(champ);
     champ->carry = 1;
+    g = g;
 }

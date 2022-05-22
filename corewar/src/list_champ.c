@@ -20,6 +20,8 @@ champions_t *init_node(champions_t *champ)
     champ->cycle_to_die = 0;
     champ->instruction = 0;
     champ->alive = 1;
+    for (int i = 0; i < REG_NUMBER; i++)
+        champ->registre[i] = 0;
     for (int i = 0; i <= 4; i++)
         champ->instru[i].value = 0;
     champ->next = NULL;
@@ -85,7 +87,8 @@ void free_champ(champions_t *arg)
         free(tmp->comment);
         free(tmp->name);
         free(tmp->code);
-        fclose(tmp->ptr);
+        if (tmp->ptr != NULL)
+            fclose(tmp->ptr);
         free(tmp);
     }
     free (arg);

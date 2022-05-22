@@ -22,4 +22,5 @@ void execute_add(corewar_t *g, champions_t *champ)
         return;
     add_instru(champ);
     champ->carry = 1;
+    g = g;
 }

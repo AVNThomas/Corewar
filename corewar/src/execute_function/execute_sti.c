@@ -25,6 +25,6 @@ void execute_sti(corewar_t *g, champions_t *champ)
         value2 = champ->registre[champ->instru[2].value - 1];
     if (champ->instru[2].rid == 'd')
         value2 = champ->instru[2].value;
-    g->vm[(champ->head + (value1 + value2) % IDX_MOD) % MEM_SIZE] =
+    g->vm[(champ->head + ((value1 + value2) % IDX_MOD)) % MEM_SIZE] =
     champ->registre[champ->instru[0].value - 1];
 }

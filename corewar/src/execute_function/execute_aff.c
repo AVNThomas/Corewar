@@ -14,4 +14,5 @@ void execute_aff(corewar_t *g, champions_t *champ)
         return;
     value = (char)champ->registre[champ->instru[0].value - 1];
     my_putchar(value);
+    g = g;
 }

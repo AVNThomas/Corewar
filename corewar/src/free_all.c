@@ -12,6 +12,7 @@ void free_all(corewar_t *g)
     free_arg(g->list);
     free_champ(g->champ);
     free_header(g->header);
+    free(g->last_name);
     free(g->vm);
     free(g);
 }

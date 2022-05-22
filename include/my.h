@@ -53,10 +53,15 @@ int my_char_is_alpha(char c);
 int my_char_is_alpha_sup(char c);
 int my_char_is_alpha_inf(char c);
 int my_putchar(char c);
+char *my_strcpy_malloc(char *dest, char const *src);
 void print_darray(char **darray);
 void my_putnbr_float(float value);
 char *my_revstr(char *str);
 char **my_spliter(char *str, char const lim);
 int d2_arr_size(char **tab);
+int my_str_is_alpha_num(char *str);
+u_char *my_strucpy_malloc(u_char *dest, u_char const *src, int size);
+u_char *my_strucpy(u_char *dest, u_char const *src, int size);
+int my_strstr(char *sub_string, char *full_string);
 
 #endif

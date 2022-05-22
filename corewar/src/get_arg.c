@@ -31,7 +31,6 @@ champions_t *champ, corewar_t *g)
         return (84);
     int nbr_args = op_tab[function].nbr_args;
     int arg = 0;
-
     if (func_arg == NULL)
         return (get_argument_alone(function, champ, g));
     if (function >= 8 && function <= 11)

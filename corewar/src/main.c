@@ -51,8 +51,7 @@ void virtual_machine(corewar_t *g)
             break;
         cycle++;
     }
-    if (g->nb_cycle > 0)
-        dump_memory(g);
+    g->nb_cycle > 0 ? dump_memory(g) : 0;
     if (g->last_name == NULL)
         my_printf("No winner\n");
     else
@@ -62,7 +61,7 @@ void virtual_machine(corewar_t *g)
 
 void fill_champ(corewar_t *g)
 {
-    args_t *tmp = NULL;
+    args_t *tmp = g->list;
 
     while (g->list != NULL) {
         find_header(g, g->list->name);
@@ -88,11 +87,11 @@ int main(int ac, char **argv)
     }
     g = init_struct(g);
     if (g == NULL) {
-        my_free("sstt", g->header->name, g->header->comment, g->header, g);
+        free(g);
         return (84);
     }
     fill_champ(g);
     virtual_machine(g);
-    //free_all(g);
+    free_all(g);
     return (0);
 }

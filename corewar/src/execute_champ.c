@@ -38,6 +38,7 @@ void advance_to_next_func(champions_t *champ, corewar_t *g)
         bitmask = get_bitmask(champ, g);
     func_size = get_func_arg(bitmask);
     get_argument(func_size, champ->instruction, champ, g);
+    free(func_size);
 }
 
 void execute_champion(corewar_t *g)
