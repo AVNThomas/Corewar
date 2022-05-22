@@ -34,3 +34,10 @@ int my_char_is_alpha_inf(char c)
         return (1);
     return (0);
 }
+
+int my_char_is_alnum(char c)
+{
+    if (my_char_is_alpha(c) || my_char_is_num(c))
+        return (0);
+    return (1);
+}

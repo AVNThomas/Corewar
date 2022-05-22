@@ -9,7 +9,20 @@ NAME	=	asm
 
 CC	=	gcc
 
-SRCS	=	src/main.c\
+SRCS	=	src/compile_prog.c\
+		src/find_line.c\
+		src/generate_core.c\
+		src/generate_header.c\
+		src/main.c\
+		src/write_core.c\
+		src/write_prog.c\
+		src/linked_list.c\
+		src/pars_linked_list.c\
+		src/op.c\
+		src/check_type.c\
+		src/get_size.c\
+		src/find_zjump.c\
+		src/bitmask.c
 
 SRCS_TEST	=	tests/tests_asm.c\
 
@@ -44,6 +57,7 @@ tests_run: ${OBJ_TEST}
 clean:
 	rm -rf ${OBJ_DIR}
 	rm -rf vgcore*
+	rm -rf *.cor
 
 fclean: clean
 	rm -rf ${NAME}
