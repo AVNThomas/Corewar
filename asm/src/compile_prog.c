@@ -7,13 +7,24 @@
 
 #include "../include/asm.h"
 
+static char *remove_comment(char *line, int pos, int comment)
+{
+    int size_line = my_strlen(line);
+
+    if (comment != 0)
+        for (int i = 0; i != size_line; i++, pos++)
+            line[pos] = '\0';
+    return (line);
+}
+
 static asm_list_t *check_asm_line(char *line, asm_list_t *list)
 {
     int size_comment = my_strlen(COMMENT_CMD_STRING);
     int size_name = my_strlen(NAME_CMD_STRING);
-
-    if (my_char_is_alnum(line[0]))
-        line++;
+    int comment = -1;
+    for (int comment_pos = 0; line[comment_pos] != '\0'; comment_pos++)
+        if (line[comment_pos] == COMMENT_CHAR)
+            line = remove_comment(line, comment_pos, comment);
     if (my_strncmp(COMMENT_CMD_STRING, line, size_comment) == 0 ||
         my_strncmp(NAME_CMD_STRING, line, size_name) == 0)
         return (0);
