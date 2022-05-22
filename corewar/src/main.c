@@ -7,49 +7,73 @@
 
 #include "../include/corewar.h"
 
-int helper(char *prog, int ret_val)
+int check_alive_champ(corewar_t *g)
 {
-    my_printf("USAGE:\n%s [-dump nbr_cycle] [[-n prog_number] ", prog);
-    my_printf("[-a load_address] prog_name]\n");
-    my_printf("DESCRIPTION:\n-dump nbr_cycle dumps the memory after the ");
-    my_printf("nbr_cycle execution (if the round isn’t already over) with ");
-    my_printf("the following format: 32 bytes/line in hexadecimal ");
-    my_printf("(A0BCDEFE1DD3...)\n-n prog_number sets the next program’s ");
-    my_printf("number. By default, the first free number in the parameter ");
-    my_printf("order\n-a load_address sets the next program’s loading ");
-    my_printf("address. When no address is specified, optimize the ");
-    my_printf("addresses so that the processes are as far away from");
-    my_printf("each other as possible. The addresses are MEM_SIZE modulo.\n");
-    return (ret_val);
+    champions_t *tmp = g->champ;
+    int tmp2 = 0;
+
+    for (; tmp != NULL; tmp = tmp->next) {
+        if (tmp->alive == 1) {
+            tmp2 = tmp->number;
+            break;
+        }
+    }
+    tmp = g->champ;
+    for (; tmp != NULL; tmp = tmp->next) {
+        if (tmp->alive == 1 && tmp->number != tmp2)
+            return (1);
+    }
+    return (0);
+}
+
+void dump_memory(corewar_t *g)
+{
+    for (int i = 0; i < MEM_SIZE; i++) {
+        print_hexa(g->vm[i]);
+        if (i % 32 == 31)
+            printf("\n");
+    }
 }
 
 void virtual_machine(corewar_t *g)
 {
+    int cycle = 1;
     place_champion(g);
-    for (champions_t *tmp = g->champ; tmp != NULL; tmp = tmp->next) {
-            advance_to_next_func(tmp, g);
-    }
+    for (champions_t *tmp = g->champ; tmp != NULL; tmp = tmp->next)
+        advance_to_next_func(tmp, g);
     while (1) {
+        if (cycle == g->nb_cycle)
+            break;
         execute_champion(g);
+        if (g->cycle_to_die <= 0)
+            break;
+        if (check_alive_champ(g) == 0)
+            break;
+        cycle++;
     }
+    if (g->nb_cycle > 0)
+        dump_memory(g);
+    if (g->last_name == NULL)
+        my_printf("No winner\n");
+    else
+        my_printf("The player %d(%s)has won\n", g->last_number,
+        g->last_name);
+    printf("nbr cycle : %d\n", g->nb_cycle);
 }
 
 void fill_champ(corewar_t *g)
 {
     args_t *tmp = NULL;
 
-    print_list(g->list);
     while (g->list != NULL) {
         find_header(g, g->list->name);
-        get_first_function(g->list->name);
         add_champ(&g->champ, g->header, g->list);
         g->list = g->list->next;
     }
     g->list = tmp;
-    print_champ(g->champ);
 }
 
-int main (int ac, char **argv)
+int main(int ac, char **argv)
 {
     corewar_t *g = malloc(sizeof(corewar_t));
     int ret_value = 0;
@@ -57,6 +81,7 @@ int main (int ac, char **argv)
     if (!g)
         return (84);
     g = my_memset(g, 0, sizeof(corewar_t));
+    g->list = NULL;
     ret_value = arg_handler(g, ac, argv);
     if (ret_value == 84 || ret_value == 0) {
         free(g);
@@ -69,6 +94,6 @@ int main (int ac, char **argv)
     }
     fill_champ(g);
     virtual_machine(g);
-    free_all(g);
+    //free_all(g);
     return (0);
 }

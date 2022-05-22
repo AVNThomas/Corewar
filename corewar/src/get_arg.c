@@ -27,13 +27,15 @@ int get_argument(func_size_t *func_arg, int function,
 champions_t *champ, corewar_t *g)
 {
     int dir_size = DIR_SIZE;
+    if (function < 0 || function > 16)
+        return (84);
     int nbr_args = op_tab[function].nbr_args;
     int arg = 0;
 
-    if (function >= 8 && function <= 11)
-        dir_size = IND_SIZE;
     if (func_arg == NULL)
         return (get_argument_alone(function, champ, g));
+    if (function >= 8 && function <= 11)
+        dir_size = IND_SIZE;
     for (int i = 0; i < nbr_args; i++) {
         champ->instru[i].rid = func_arg->arg[i];
         if (func_arg->arg[i] == 'r')

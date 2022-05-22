@@ -23,12 +23,13 @@ void place_champion(corewar_t *g)
     champions_t *tmp = g->champ;
 
     for (int i = 0; i < g->nb_player; i++) {
-        load_adress[i] = MEM_SIZE / g->nb_player * i;
+        load_adress[i] = MEM_SIZE / (g->nb_player) * i;
     }
     for (int i = 0; i < g->nb_player; i++) {
         tmp->load_adress = load_adress[i];
         tmp->head = load_adress[i];
         tmp->tail = load_adress[i];
+        tmp->alive = 1;
         write_char_in_mem(g, tmp, tmp->code, tmp->prog_size);
         tmp->head = tmp->tail;
         tmp = tmp->next;

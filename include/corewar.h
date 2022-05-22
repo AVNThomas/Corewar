@@ -23,14 +23,17 @@ typedef struct instruction_s {
 typedef struct champions_s {
     char *name;
     char *comment;
-    unsigned char *code;
+    u_char *code;
     int prog_size;
     int number;
     int load_adress;
+    int carry;
     int head;
+    int alive;
     int tail;
     FILE *ptr;
     int cycles;
+    int cycle_to_die;
     int instruction;
     instruction_t instru[4];
     int registre[REG_NUMBER];
@@ -49,7 +52,7 @@ typedef struct vm_header_s {
     char *name;
     int prog_size;
     char *comment;
-    unsigned char *code;
+    u_char *code;
 }vm_header_t;
 
 typedef struct corewar_s {
@@ -59,7 +62,12 @@ typedef struct corewar_s {
     int tmp_nb_player;
     int load_adress;
     args_t *list;
-    unsigned char *vm;
+    u_char *vm;
+    char *last_name;
+    int last_number;
+    int cycle_to_die;
+    int cycle_delta;
+    int nb_live;
     champions_t *champ;
 }corewar_t;
 
@@ -82,7 +90,6 @@ int hexa_to_decimal2(int hexa);
 int arg_handler(corewar_t *g, int ac, char **av);
 int arg_list_handler(corewar_t *g, char **av, int i);
 void print_list(args_t *list);
-void add_node(args_t **list, char *name, int nb_player, int address);
 void add_champ(champions_t **list, vm_header_t *header, args_t *arg);
 void free_header(vm_header_t *header);
 void print_champ(champions_t *champ);
@@ -90,10 +97,10 @@ void free_champ(champions_t *champ);
 void free_arg(args_t *arg);
 void free_all(corewar_t *g);
 void place_champion(corewar_t *g);
-void write_char_in_mem(corewar_t *g, champions_t *champ, unsigned char *value,
+void write_char_in_mem(corewar_t *g, champions_t *champ, u_char *value,
 int size);
 int find_function(int mnemonic);
-unsigned char read_char_in_mem(corewar_t *g, champions_t *champ);
+u_char read_char_in_mem(corewar_t *g, champions_t *champ);
 void execute_champion(corewar_t *g);
 int get_argument(func_size_t *func_arg, int function,
 champions_t *champ, corewar_t *g);
@@ -118,3 +125,7 @@ void execute_aff(corewar_t *g, champions_t *champ);
 args_t *add_argument(args_t *list, char *name, int address, int nb_player);
 void execute_function(champions_t *champ, corewar_t *g);
 void advance_to_next_func(champions_t *champ, corewar_t *g);
+args_t *add_node(args_t *list, char *name, int nb_player, int address);
+void fork_champ(champions_t *champ);
+void print_hexa(int value);
+int decimal_to_hexa(int decimal);

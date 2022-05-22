@@ -8,7 +8,7 @@
 #include "../include/corewar.h"
 
 void write_char_in_mem(corewar_t *g, champions_t *champ,
-unsigned char *value, int size)
+u_char *value, int size)
 {
     for (int i = 0; i <= size; i++) {
         g->vm[champ->head] = value[i];
@@ -18,12 +18,14 @@ unsigned char *value, int size)
     }
 }
 
-unsigned char read_char_in_mem(corewar_t *g, champions_t *champ)
+u_char read_char_in_mem(corewar_t *g, champions_t *champ)
 {
-    unsigned char value;
+    u_char value;
 
     value = g->vm[champ->head];
     champ->head++;
+    if (champ->head == MEM_SIZE)
+        champ->head = 0;
     return (value);
 }
 

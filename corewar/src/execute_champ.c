@@ -18,6 +18,7 @@ int get_func_type(champions_t *champ, corewar_t *g)
 int get_bitmask(champions_t *champ, corewar_t *g)
 {
     int bitmask = 0;
+
     bitmask = (int)read_char_in_mem(g, champ);
     return (bitmask);
 }
@@ -42,12 +43,16 @@ void advance_to_next_func(champions_t *champ, corewar_t *g)
 void execute_champion(corewar_t *g)
 {
     for (champions_t *tmp = g->champ; tmp != NULL; tmp = tmp->next) {
+        if (tmp->alive == 0)
+            continue;
         if (tmp->cycles == 0) {
             execute_function(tmp, g);
             advance_to_next_func(tmp, g);
         }
-        if (tmp->cycles > 0) {
-            tmp->cycles--;
+        if (tmp->cycle_to_die >= g->cycle_to_die) {
+            tmp->alive = 0;
         }
+        tmp->cycles > 0 ? tmp->cycles-- : 0;
+        tmp->cycle_to_die++;
     }
 }

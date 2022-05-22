@@ -53,6 +53,7 @@ int my_putchar(char c);
 void print_darray(char **darray);
 void my_putnbr_float(float value);
 char *my_revstr(char *str);
-unsigned char *my_strucpy(unsigned char *dest, unsigned char const *src,
-int size);
+u_char *my_strucpy(u_char *dest, u_char const *src, int size);
 int my_strstr(char *sub_string, char *full_string);
+char *my_strcpy_malloc(char *dest, char const *src);
+u_char *my_strucpy_malloc(u_char *dest, u_char const *src, int size);

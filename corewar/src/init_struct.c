@@ -7,7 +7,7 @@
 
 #include "../include/corewar.h"
 
-unsigned char *set_null_value(unsigned char *value, int size)
+u_char *set_null_value(u_char *value, int size)
 {
     for (int i = 0; i < size; i++)
         value[i] = 0;
@@ -31,17 +31,10 @@ corewar_t *init_struct(corewar_t *g)
     if (g->vm == NULL)
         return (NULL);
     g->vm = set_null_value(g->vm, MEM_SIZE);
+    g->cycle_to_die = CYCLE_TO_DIE;
+    g->cycle_delta = CYCLE_DELTA;
+    g->nb_live = 0;
+    g->last_number = -1;
+    g->last_name = NULL;
     return (g);
-}
-
-void fill_list(corewar_t *g)
-{
-    args_t *tmp = g->list;
-
-    while (tmp != NULL) {
-        find_header(g, tmp->name);
-        get_first_function(tmp->name);
-        add_champ(&g->champ, g->header, tmp);
-        tmp = tmp->next;
-    }
 }

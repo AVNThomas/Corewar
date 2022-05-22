@@ -10,7 +10,7 @@
 void *my_memset(void *to_set, int character, size_t len)
 {
     char *str = to_set;
-    unsigned char chara = character;
+    u_char chara = character;
 
     while (len > 0) {
         *str = chara;

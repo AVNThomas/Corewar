@@ -14,7 +14,7 @@ SRCS	=	$(wildcard src/*.c)						\
 
 SRCS_TEST	=	tests/tests_vm.c\
 
-CFLAGS	=	-Wall -Wundef -g -Werror
+CFLAGS	=	-Wall -Wextra -Wundef -g
 
 LIB_DIR	=	../lib/
 LIB	=	my
