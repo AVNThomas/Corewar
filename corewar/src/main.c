@@ -31,7 +31,7 @@ void dump_memory(corewar_t *g)
     for (int i = 0; i < MEM_SIZE; i++) {
         print_hexa(g->vm[i]);
         if (i % 32 == 31)
-            printf("\n");
+            my_printf("\n");
     }
 }
 
@@ -58,7 +58,6 @@ void virtual_machine(corewar_t *g)
     else
         my_printf("The player %d(%s)has won\n", g->last_number,
         g->last_name);
-    printf("nbr cycle : %d\n", g->nb_cycle);
 }
 
 void fill_champ(corewar_t *g)

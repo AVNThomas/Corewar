@@ -59,10 +59,10 @@ static int dump(corewar_t *g, char **av, int i)
 int arg_handler(corewar_t *g, int ac, char **av)
 {
     g->tmp_nb_player = -1;
-    if (ac == 1)
-        return (helper(av[0], 84));
     if (ac == 2 && my_strcmp(av[1], "-h"))
         return (helper(av[0], 0));
+    if (ac <= 2)
+        return (helper(av[0], 84));
     for (int i = 1; i < ac; i++) {
         if (dump(g, av, i) == 84)
             return (84);
