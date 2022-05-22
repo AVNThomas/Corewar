@@ -9,11 +9,12 @@ NAME	=	corewar
 
 CC	=	gcc
 
-SRCS	=	src/main.c\
+SRCS	=	$(wildcard src/*.c)						\
+			$(wildcard src/execute_function/*.c)	\
 
 SRCS_TEST	=	tests/tests_vm.c\
 
-CFLAGS	=	-Wall -Werror -Wextra -fanalyzer -Wundef -g
+CFLAGS	=	-Wall -Wextra -Wundef -g
 
 LIB_DIR	=	../lib/
 LIB	=	my
