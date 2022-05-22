@@ -50,8 +50,7 @@ typedef struct header_s {
     char comment[COMMENT_LENGTH + 1];
 } header_t;
 
-typedef struct op_list_s
-{
+typedef struct op_list_s {
     op_t op;
     struct op_list_s *next;
 } op_list_t;
